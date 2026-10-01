@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Alien ❤️ Pori</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  font-family:Arial,sans-serif;
+  background:radial-gradient(circle,#4b126b,#160021 55%,#050008);
+  color:white;
+}
+
+/* LOGIN */
+
+.login{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.login-box{
+  width:100%;
+  max-width:360px;
+  padding:35px 25px;
+  text-align:center;
+  border-radius:25px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(15px);
+  box-shadow:0 0 35px rgba(255,20,147,.35);
+}
+
+.login-heart{
+  font-size:65px;
+  animation:beat 1.2s infinite;
+}
+
+@keyframes beat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+}
+
+.login-box h1{
+  margin:15px 0 8px;
+  font-size:30px;
+  text-shadow:0 0 20px #ff1493;
+}
+
+.login-box p{
+  margin-bottom:25px;
+  opacity:.8;
+}
+
+input{
+  width:100%;
+  padding:15px;
+  margin:8px 0;
+  border:none;
+  outline:none;
+  border-radius:30px;
+  background:rgba(255,255,255,.12);
+  color:white;
+  font-size:16px;
+}
+
+input::placeholder{
+  color:#ddd;
+}
+
+.login-btn{
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  border:none;
+  border-radius:30px;
+  color:white;
+  font-size:17px;
+  background:linear-gradient(90deg,#ff1493,#8a2be2);
+  box-shadow:0 0 20px rgba(255,20,147,.5);
+  cursor:pointer;
+}
+
+#error{
+  color:#ff7b9c;
+  margin-top:15px;
+  min-height:20px;
+}
+
+/* HOME */
+
+#website{
+  display:none;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.home{
+  width:100%;
+  max-width:500px;
+  text-align:center;
+}
+
+.home-heart{
+  font-size:80px;
+  animation:beat 1.2s infinite;
+}
+
+.home h1{
+  font-size:34px;
+  margin:15px 0;
+  text-shadow:0 0 20px #ff1493;
+}
+
+.message{
+  padding:20px;
+  border-radius:20px;
+  background:rgba(255,255,255,.08);
+  margin:20px 0;
+  line-height:1.8;
+}
+
+.music-btn,
+.open-chat{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border:none;
+  border-radius:30px;
+  color:white;
+  font-size:17px;
+  background:linear-gradient(90deg,#ff1493,#8a2be2);
+  cursor:pointer;
+}
+
+/* CHAT */
+
+#chatPage{
+  display:none;
+  width:100%;
+  max-width:500px;
+  height:90vh;
+  flex-direction:column;
+  border-radius:25px;
+  overflow:hidden;
+  background:rgba(20,0,30,.78);
+  backdrop-filter:blur(15px);
+  box-shadow:0 0 35px rgba(255,20,147,.3);
+}
+
+.chat-header{
+  padding:15px;
+  text-align:center;
+  background:linear-gradient(90deg,#ff1493,#8a2be2);
+}
+
+.chat-name{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.status{
+  font-size:12px;
+  margin-top:4px;
+  opacity:.9;
+}
+
+.online{
+  color:#7cff9e;
+}
+
+.typing{
+  color:#ffd1f0;
+}
+
+#messages{
+  flex:1;
+  padding:15px;
+  overflow-y:auto;
+}
+
+.msg{
+  max-width:75%;
+  padding:11px 14px;
+  margin:8px 0;
+  border-radius:18px;
+  word-wrap:break-word;
+}
+
+.my-msg{
+  margin-left:auto;
+  background:linear-gradient(135deg,#ff1493,#8a2be2);
+  border-bottom-right-radius:5px;
+}
+
+.other-msg{
+  margin-right:auto;
+  background:rgba(255,255,255,.13);
+  border-bottom-left-radius:5px;
+}
+
+.msg-time{
+  display:block;
+  font-size:10px;
+  opacity:.65;
+  margin-top:5px;
+  text-align:right;
+}
+
+.seen{
+  font-size:10px;
+  margin-left:5px;
+}
+
+.chat-input-area{
+  display:flex;
+  gap:8px;
+  padding:12px;
+  background:rgba(0,0,0,.25);
+}
+
+#messageInput{
+  flex:1;
+  margin:0;
+  text-align:left;
+}
+
+.send-btn{
+  width:55px;
+  border:none;
+  border-radius:50%;
+  background:#ff1493;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.back-btn{
+  margin:10px;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:rgba(255,255,255,.12);
+  color:white;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div class="login" id="loginPage">
+
+  <div class="login-box">
+
+    <div class="login-heart">❤️</div>
+
+    <h1>Alien ❤️ Pori</h1>
+
+    <p>শুধু আমাদের দুজনের জন্য... 💕</p>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Email"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+    >
+
+    <button class="login-btn" onclick="loginUser()">
+      💕 Login
+    </button>
+
+    <button class="login-btn"
+      onclick="registerUser()"
+      style="margin-top:8px;">
+      ❤️ Create Account
+    </button>
+
+    <div id="error"></div>
+
+  </div>
+
+</div>
+
+
+<!-- WEBSITE -->
+
+<div id="website">
+
+  <div class="home" id="homePage">
+
+    <div class="home-heart">❤️</div>
+
+    <h1 id="welcomeTitle">
+      Alien ❤️ Pori
+    </h1>
+
+    <div class="message">
+      কিছু মানুষ গল্পের মতো আসে,<br>
+      তারপর গল্পটাই সুন্দর করে দেয়... 💕
+    </div>
+
+    <button class="open-chat" onclick="openChat()">
+      💬 আমাদের Message
+    </button>
+
+    <button class="music-btn" onclick="playMusic()">
+      🎵 গান চালাও
+    </button>
+
+    <audio id="music" loop>
+      <source src="Tum Hi Ho.mp3" type="audio/mpeg">
+    </audio>
+
+  </div>
+
+
+  <!-- CHAT -->
+
+  <div id="chatPage">
+
+    <div class="chat-header">
+
+      <div class="chat-name">
+        ❤️ <span id="partnerName">Pori</span>
+      </div>
+
+      <div id="partnerStatus" class="status">
+        Offline
+      </div>
+
+    </div>
+
+
+    <div id="messages"></div>
+
+
+    <div class="chat-input-area">
+
+      <input
+        type="text"
+        id="messageInput"
+        placeholder="একটা মেসেজ লেখো... ❤️"
+        oninput="handleTyping()"
+        onkeydown="handleEnter(event)"
+      >
+
+      <button class="send-btn" onclick="sendMessage()">
+        ➤
+      </button>
+
+    </div>
+
+
+    <button class="back-btn" onclick="closeChat()">
+      ← Back
+    </button>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+  doc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+
+/* =========================
+   FIREBASE
+========================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB6DFVQNrPmKtshg978khg7GAKCrS69ANU",
+  authDomain: "alien-pori---chat.firebaseapp.com",
+  projectId: "alien-pori---chat",
+  storageBucket: "alien-pori---chat.firebasestorage.app",
+  messagingSenderId: "141609051933",
+  appId: "1:141609051933:web:7abdb1828986b5a29ee3f4",
+  measurementId: "G-KC5NKQ57H6"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =========================
+   IMPORTANT
+   তোমাদের আসল দুই email এখানে বসাও
+========================= */
+
+const ALIEN_EMAIL = "alien@example.com";
+
+const PORI_EMAIL = "pori@example.com";
+
+
+/* =========================
+   USER ROLE
+========================= */
+
+function getRole(email){
+
+  if(email.toLowerCase() === ALIEN_EMAIL.toLowerCase()){
+    return "Alien";
+  }
+
+  if(email.toLowerCase() === PORI_EMAIL.toLowerCase()){
+    return "Pori";
+  }
+
+  return null;
+}
+
+
+function getPartnerEmail(email){
+
+  if(email.toLowerCase() === ALIEN_EMAIL.toLowerCase()){
+    return PORI_EMAIL;
+  }
+
+  return ALIEN_EMAIL;
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+window.registerUser = async function(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const error =
+    document.getElementById("error");
+
+  const role = getRole(email);
+
+  if(!role){
+
+    error.innerHTML =
+      "❌ এই website শুধু Alien ও Pori account-এর জন্য";
+
+    return;
+  }
+
+  if(password.length < 6){
+
+    error.innerHTML =
+      "❌ Password কমপক্ষে 6 characters হতে হবে";
+
+    return;
+  }
+
+  try{
+
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }catch(err){
+
+    error.innerHTML =
+      "❌ " + err.message;
+
+  }
+
+};
+
+
+/* =========================
+   LOGIN
+========================= */
+
+window.loginUser = async function(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const error =
+    document.getElementById("error");
+
+  const role = getRole(email);
+
+  if(!role){
+
+    error.innerHTML =
+      "❌ শুধু Alien অথবা Pori account দিয়ে login করা যাবে";
+
+    return;
+  }
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }catch(err){
+
+    error.innerHTML =
+      "❌ " + err.message;
+
+  }
+
+};
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(auth, async(user)=>{
+
+  if(!user) return;
+
+  const role = getRole(user.email);
+
+  if(!role){
+
+    await auth.signOut();
+
+    return;
+  }
+
+  document.getElementById("loginPage").style.display =
+    "none";
+
+  document.getElementById("website").style.display =
+    "flex";
+
+  document.getElementById("welcomeTitle").innerHTML =
+    role === "Alien"
+      ? "Welcome Alien ❤️"
+      : "Welcome Pori ❤️";
+
+  document.getElementById("partnerName").innerText =
+    role === "Alien"
+      ? "Pori"
+      : "Alien";
+
+  startPresence(user);
+
+  loadPartnerStatus(user);
+
+  loadMessages(user);
+
+});
+
+
+/* =========================
+   ONLINE / OFFLINE
+========================= */
+
+let presenceTimer;
+
+async function startPresence(user){
+
+  const ref =
+    doc(db,"presence",user.uid);
+
+  await setDoc(
+    ref,
+    {
+      email:user.email,
+      role:getRole(user.email),
+      online:true,
+      lastSeen:serverTimestamp()
+    },
+    {merge:true}
+  );
+
+  clearInterval(presenceTimer);
+
+  presenceTimer = setInterval(async()=>{
+
+    if(auth.currentUser){
+
+      await updateDoc(ref,{
+        online:true,
+        lastSeen:serverTimestamp()
+      });
+
+    }
+
+  },20000);
+
+
+  window.addEventListener("beforeunload",()=>{
+
+    updateDoc(ref,{
+      online:false,
+      lastSeen:serverTimestamp()
+    });
+
+  });
+
+}
+
+
+/* =========================
+   PARTNER STATUS
+========================= */
+
+function loadPartnerStatus(user){
+
+  const partnerEmail =
+    getPartnerEmail(user.email);
+
+  const partnerRole =
+    getRole(partnerEmail);
+
+  const statusBox =
+    document.getElementById("partnerStatus");
+
+  const q =
+    query(
+      collection(db,"presence")
+    );
+
+  onSnapshot(q,(snapshot)=>{
+
+    let found = false;
+
+    snapshot.forEach(item=>{
+
+      const data = item.data();
+
+      if(
+        data.email &&
+        data.email.toLowerCase() ===
+        partnerEmail.toLowerCase()
+      ){
+
+        found = true;
+
+        if(data.online){
+
+          statusBox.innerHTML =
+            "🟢 Online";
+
+          statusBox.className =
+            "status online";
+
+        }else{
+
+          let last = "";
+
+          if(data.lastSeen){
+
+            last =
+              data.lastSeen.toDate()
+              .toLocaleTimeString(
+                "bn-BD",
+                {
+                  hour:"2-digit",
+                  minute:"2-digit"
+                }
+              );
+          }
+
+          statusBox.innerHTML =
+            "⚫ Offline" +
+            (last ? " • " + last : "");
+
+          statusBox.className =
+            "status";
+
+        }
+
+      }
+
+    });
+
+    if(!found){
+
+      statusBox.innerHTML =
+        "⚫ Offline";
+
+      statusBox.className =
+        "status";
+
+    }
+
+  });
+
+}
+
+
+/* =========================
+   CHAT OPEN
+========================= */
+
+window.openChat = function(){
+
+  document.getElementById("homePage").style.display =
+    "none";
+
+  document.getElementById("chatPage").style.display =
+    "flex";
+
+};
+
+
+/* =========================
+   CHAT CLOSE
+========================= */
+
+window.closeChat = function(){
+
+  document.getElementById("chatPage").style.display =
+    "none";
+
+  document.getElementById("homePage").style.display =
+    "block";
+
+};
+
+
+/* =========================
+   SEND MESSAGE
+========================= */
+
+window.sendMessage = async function(){
+
+  const input =
+    document.getElementById("messageInput");
+
+  const text =
+    input.value.trim();
+
+  const user =
+    auth.currentUser;
+
+  if(!user || !text) return;
+
+  const role =
+    getRole(user.email);
+
+  if(!role) return;
+
+  try{
+
+    await addDoc(
+      collection(db,"messages"),
+      {
+
+        text:text,
+
+        senderUid:user.uid,
+
+        senderEmail:user.email,
+
+        senderRole:role,
+
+        seen:false,
+
+        createdAt:serverTimestamp()
+
+      }
+    );
+
+    input.value = "";
+
+    await setTyping(false);
+
+  }catch(error){
+
+    console.error(error);
+
+    alert("Message পাঠানো যায়নি 😢");
+
+  }
+
+};
+
+
+/* =========================
+   LOAD MESSAGES
+========================= */
+
+function loadMessages(user){
+
+  const messagesBox =
+    document.getElementById("messages");
+
+  const q =
+    query(
+      collection(db,"messages"),
+      orderBy("createdAt","asc")
+    );
+
+  onSnapshot(q,async(snapshot)=>{
+
+    messagesBox.innerHTML = "";
+
+    const partnerEmail =
+      getPartnerEmail(user.email);
+
+    for(const item of snapshot.docs){
+
+      const data = item.data();
+
+      /* শুধুমাত্র Alien/Pori message */
+
+      const validSender =
+        data.senderEmail &&
+        (
+          data.senderEmail.toLowerCase()
+          === user.email.toLowerCase()
+          ||
+          data.senderEmail.toLowerCase()
+          === partnerEmail.toLowerCase()
+        );
+
+      if(!validSender) continue;
+
+
+      const div =
+        document.createElement("div");
+
+      div.classList.add("msg");
+
+
+      const mine =
+        data.senderEmail.toLowerCase()
+        === user.email.toLowerCase();
+
+
+      if(mine){
+
+        div.classList.add("my-msg");
+
+      }else{
+
+        div.classList.add("other-msg");
+
+        /* partner-এর message দেখলে seen */
+
+        if(!data.seen){
+
+          try{
+
+            await updateDoc(
+              doc(db,"messages",item.id),
+              {
+                seen:true
+              }
+            );
+
+          }catch(e){
+
+            console.log(e);
+
+          }
+
+        }
+
+      }
+
+
+      const time =
+        data.createdAt
+        ? data.createdAt.toDate()
+          .toLocaleTimeString(
+            "bn-BD",
+            {
+              hour:"2-digit",
+              minute:"2-digit"
+            }
+          )
+        : "...";
+
+
+      let seenText = "";
+
+      if(mine){
+
+        seenText =
+          data.seen
+          ? '<span class="seen">✓✓ Seen</span>'
+          : '<span class="seen">✓ Sent</span>';
+
+      }
+
+
+      div.innerHTML = `
+        ${escapeHTML(data.text)}
+
+        <span class="msg-time">
+          ${time} ${seenText}
+        </span>
+      `;
+
+
+      messagesBox.appendChild(div);
+
+    }
+
+
+    messagesBox.scrollTop =
+      messagesBox.scrollHeight;
+
+  });
+
+}
+
+
+/* =========================
+   TYPING
+========================= */
+
+let typingTimeout;
+
+window.handleTyping = function(){
+
+  setTyping(true);
+
+  clearTimeout(typingTimeout);
+
+  typingTimeout =
+    setTimeout(()=>{
+
+      setTyping(false);
+
+    },1200);
+
+};
+
+
+async function setTyping(value){
+
+  const user =
+    auth.currentUser;
+
+  if(!user) return;
+
+  const role =
+    getRole(user.email);
+
+  if(!role) return;
+
+  try{
+
+    await setDoc(
+      doc(db,"typing",user.uid),
+      {
+
+        email:user.email,
+
+        role:role,
+
+        typing:value,
+
+        updatedAt:serverTimestamp()
+
+      },
+      {merge:true}
+    );
+
+  }catch(e){
+
+    console.log(e);
+
+  }
+
+}
+
+
+/* =========================
+   ENTER SEND
+========================= */
+
+window.handleEnter = function(event){
+
+  if(event.key === "Enter"){
+
+    event.preventDefault();
+
+    sendMessage();
+
+  }
+
+};
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHTML(text){
+
+  const div =
+    document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================
+   MUSIC
+========================= */
+
+window.playMusic = function(){
+
+  const music =
+    document.getElementById("music");
+
+  music.play();
+
+};
+
+</script>
+
+</body>
+</html>
