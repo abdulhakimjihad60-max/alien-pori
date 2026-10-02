@@ -12,7 +12,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -25,8 +25,6 @@ body{
         #130b1d;
     color:white;
 }
-
-/* APP */
 
 .app{
     width:100%;
@@ -55,51 +53,33 @@ body{
     border-bottom:1px solid rgba(255,255,255,.12);
 }
 
-/* PROFILE */
-
 .profile{
     width:52px;
     height:52px;
-
     position:relative;
-
     margin-right:12px;
-
     cursor:pointer;
 }
 
 .profile img{
     width:52px;
     height:52px;
-
     border-radius:50%;
-
     object-fit:cover;
-
     border:2px solid rgba(255,255,255,.75);
-
     background:#33213b;
 }
-
-/* ONLINE */
 
 .online-dot{
     width:13px;
     height:13px;
-
     position:absolute;
-
     right:0;
     bottom:1px;
-
     background:#20e66a;
-
     border:2px solid #211126;
-
     border-radius:50%;
 }
-
-/* PROFILE INFO */
 
 .info h2{
     font-size:18px;
@@ -116,11 +96,8 @@ body{
 
 .chat{
     flex:1;
-
     overflow-y:auto;
-
     padding:15px 13px 12px;
-
     scroll-behavior:smooth;
 }
 
@@ -137,19 +114,12 @@ body{
 
 .message{
     max-width:78%;
-
     padding:9px 12px;
-
     margin-bottom:7px;
-
     border-radius:18px;
-
     font-size:15px;
-
     line-height:1.4;
-
     word-break:break-word;
-
     animation:messageIn .15s ease-out;
 }
 
@@ -164,41 +134,29 @@ body{
         opacity:1;
         transform:translateY(0);
     }
-}
 
-/* PORI */
+}
 
 .message.pori{
     margin-right:auto;
-
     background:rgba(255,255,255,.12);
-
     border-bottom-left-radius:5px;
 }
 
-/* MY MESSAGE */
-
 .message.me{
     margin-left:auto;
-
     background:linear-gradient(
         135deg,
         #ff3f9f,
         #984cff
     );
-
     border-bottom-right-radius:5px;
 }
 
-/* TIME */
-
 .time{
     margin-top:3px;
-
     font-size:9px;
-
     text-align:right;
-
     opacity:.65;
 }
 
@@ -206,53 +164,35 @@ body{
     margin-left:4px;
 }
 
-/* IMAGE MESSAGE */
-
 .message img.sent-image{
     display:block;
-
     max-width:220px;
     max-height:280px;
-
     border-radius:13px;
-
     object-fit:cover;
 }
 
-/* INPUT AREA */
+/* INPUT */
 
 .input-area{
     width:100%;
-
     display:flex;
     align-items:center;
-
     gap:7px;
-
     padding:9px;
-
     background:rgba(255,255,255,.08);
-
     border-top:1px solid rgba(255,255,255,.1);
 }
-
-/* ICON BUTTON */
 
 .icon-btn{
     width:40px;
     height:40px;
-
     flex-shrink:0;
-
     border:none;
     border-radius:50%;
-
     background:rgba(255,255,255,.11);
-
     color:white;
-
     font-size:18px;
-
     cursor:pointer;
 
     display:flex;
@@ -266,26 +206,16 @@ body{
     transform:scale(.9);
 }
 
-/* INPUT */
-
 .input{
     flex:1;
-
     min-width:0;
-
     height:42px;
-
     border:none;
     outline:none;
-
     border-radius:22px;
-
     padding:0 15px;
-
     background:rgba(255,255,255,.11);
-
     color:white;
-
     font-size:15px;
 }
 
@@ -293,14 +223,10 @@ body{
     color:#aaa;
 }
 
-/* SEND */
-
 .send{
     width:42px;
     height:42px;
-
     flex-shrink:0;
-
     border:none;
     border-radius:50%;
 
@@ -312,19 +238,14 @@ body{
         );
 
     color:white;
-
     font-size:18px;
-
     cursor:pointer;
-
     transition:.12s;
 }
 
 .send:active{
     transform:scale(.88);
 }
-
-/* HIDDEN FILE INPUT */
 
 .hidden-file{
     display:none;
@@ -334,30 +255,21 @@ body{
 
 .overlay{
     position:fixed;
-
     inset:0;
-
     display:none;
-
     background:rgba(0,0,0,.55);
-
     z-index:50;
 }
 
 .profile-menu{
     width:290px;
-
     position:fixed;
-
     left:50%;
     top:50%;
-
     transform:translate(-50%,-50%);
 
     padding:20px;
-
     display:none;
-
     z-index:60;
 
     text-align:center;
@@ -380,13 +292,9 @@ body{
 
 .profile-menu button{
     width:100%;
-
     padding:12px;
-
     margin-top:8px;
-
     border:none;
-
     border-radius:12px;
 
     color:white;
@@ -399,7 +307,6 @@ body{
         );
 
     font-size:14px;
-
     cursor:pointer;
 }
 
@@ -407,10 +314,103 @@ body{
     background:rgba(255,255,255,.1);
 }
 
-/* NO AUTO TYPING */
+/* LOGIN */
 
-.typing{
+.login-box{
+    position:fixed;
+    inset:0;
+    z-index:100;
+
     display:none;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #6d245f,
+            #130b1d 60%
+        );
+}
+
+.login-card{
+    width:100%;
+    max-width:360px;
+
+    padding:25px;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.09);
+
+    border:1px solid rgba(255,255,255,.14);
+
+    backdrop-filter:blur(20px);
+
+    text-align:center;
+}
+
+.login-card h2{
+    margin-bottom:8px;
+}
+
+.login-card p{
+    font-size:12px;
+    color:#bbb;
+    margin-bottom:18px;
+}
+
+.login-input{
+    width:100%;
+    height:45px;
+
+    margin-top:9px;
+
+    padding:0 14px;
+
+    border:none;
+    outline:none;
+
+    border-radius:13px;
+
+    color:white;
+
+    background:rgba(255,255,255,.1);
+}
+
+.login-input::placeholder{
+    color:#aaa;
+}
+
+.login-button{
+    width:100%;
+    height:45px;
+
+    margin-top:12px;
+
+    border:none;
+    border-radius:13px;
+
+    color:white;
+
+    font-size:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3f9f,
+            #984cff
+        );
+
+    cursor:pointer;
+}
+
+.login-error{
+    margin-top:10px;
+    font-size:12px;
+    color:#ff9fbd;
 }
 
 </style>
@@ -418,6 +418,57 @@ body{
 
 
 <body>
+
+
+<!-- LOGIN -->
+
+<div
+    class="login-box"
+    id="loginBox"
+>
+
+    <div class="login-card">
+
+        <h2>💜 Pori Chat</h2>
+
+        <p>
+            Login to continue
+        </p>
+
+        <input
+            class="login-input"
+            id="emailInput"
+            type="email"
+            placeholder="Email"
+            autocomplete="email"
+        >
+
+        <input
+            class="login-input"
+            id="passwordInput"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+        >
+
+        <button
+            class="login-button"
+            onclick="loginUser()"
+        >
+            Login
+        </button>
+
+        <div
+            class="login-error"
+            id="loginError"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- APP -->
 
 <div class="app">
 
@@ -449,7 +500,7 @@ body{
                 class="status"
                 id="status"
             >
-                Online
+                Connecting...
             </div>
 
         </div>
@@ -462,37 +513,12 @@ body{
     <div
         class="chat"
         id="chat"
-    >
-
-        <div class="message pori">
-
-            Hii ❤️
-
-            <div class="time">
-                Now
-            </div>
-
-        </div>
-
-
-        <div class="message pori">
-
-            Ki korcho? 🥺
-
-            <div class="time">
-                Now
-            </div>
-
-        </div>
-
-    </div>
+    ></div>
 
 
     <!-- INPUT -->
 
     <div class="input-area">
-
-        <!-- FILE -->
 
         <button
             class="icon-btn"
@@ -506,12 +532,10 @@ body{
             type="file"
             id="fileInput"
             class="hidden-file"
-            accept="image/*,video/*"
+            accept="image/*"
             onchange="handleFile(event)"
         >
 
-
-        <!-- TEXT -->
 
         <input
             id="messageInput"
@@ -522,8 +546,6 @@ body{
         >
 
 
-        <!-- VOICE -->
-
         <button
             class="icon-btn"
             onclick="sendVoice()"
@@ -532,8 +554,6 @@ body{
             🎤
         </button>
 
-
-        <!-- SEND -->
 
         <button
             class="send"
@@ -584,6 +604,13 @@ body{
 
 
     <button
+        onclick="logoutUser()"
+    >
+        🚪 Logout
+    </button>
+
+
+    <button
         class="cancel"
         onclick="closeProfileMenu()"
     >
@@ -604,143 +631,100 @@ body{
 >
 
 
-<script>
+<!-- =========================================
+     FIREBASE
+========================================= -->
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 
 /* =========================================
-   PROFILE PICTURE
+   YOUR FIREBASE CONFIG
 ========================================= */
 
-const profilePic =
-document.getElementById("profilePic");
+const firebaseConfig = {
 
-const defaultProfile =
-"https://i.imgur.com/8Km9tLL.png";
+    apiKey:
+    "AIzaSyB6DFVQNrPmKtshg978khg7GAKCrS69ANU",
 
+    authDomain:
+    "alien-pori---chat.firebaseapp.com",
 
-/* LOAD SAVED PROFILE */
+    projectId:
+    "alien-pori---chat",
 
-const savedProfile =
-localStorage.getItem("poriProfilePicture");
+    storageBucket:
+    "alien-pori---chat.firebasestorage.app",
 
-if(savedProfile){
+    messagingSenderId:
+    "141609051933",
 
-    profilePic.src =
-    savedProfile;
+    appId:
+    "1:141609051933:web:7abdb1828986b5a29ee3f4",
 
-}
-
-
-/* OPEN MENU */
-
-function openProfileMenu(){
-
-    document.getElementById(
-        "profileMenu"
-    ).style.display = "block";
-
-    document.getElementById(
-        "overlay"
-    ).style.display = "block";
-
-}
+    measurementId:
+    "G-KC5NKQ57H6"
+};
 
 
-/* CLOSE MENU */
+/* START FIREBASE */
 
-function closeProfileMenu(){
-
-    document.getElementById(
-        "profileMenu"
-    ).style.display = "none";
-
-    document.getElementById(
-        "overlay"
-    ).style.display = "none";
-
-}
+const app =
+initializeApp(firebaseConfig);
 
 
-/* SELECT PROFILE */
-
-function chooseProfilePicture(){
-
-    document.getElementById(
-        "profileInput"
-    ).click();
-
-}
+const auth =
+getAuth(app);
 
 
-/* CHANGE PROFILE */
-
-function changeProfilePicture(event){
-
-    const file =
-    event.target.files[0];
-
-    if(!file){
-        return;
-    }
-
-
-    if(!file.type.startsWith("image/")){
-
-        alert(
-            "Please select an image."
-        );
-
-        return;
-    }
-
-
-    const reader =
-    new FileReader();
-
-
-    reader.onload =
-    function(e){
-
-        const image =
-        e.target.result;
-
-        profilePic.src =
-        image;
-
-
-        localStorage.setItem(
-            "poriProfilePicture",
-            image
-        );
-
-
-        closeProfileMenu();
-
-    };
-
-
-    reader.readAsDataURL(file);
-
-}
-
-
-/* REMOVE PROFILE */
-
-function removeProfilePicture(){
-
-    localStorage.removeItem(
-        "poriProfilePicture"
-    );
-
-    profilePic.src =
-    defaultProfile;
-
-    closeProfileMenu();
-
-}
+const db =
+getFirestore(app);
 
 
 /* =========================================
-   CHAT
+   CHAT ROOM
+========================================= */
+
+const messagesRef =
+collection(
+    db,
+    "chats",
+    "alien-pori-chat",
+    "messages"
+);
+
+
+/* =========================================
+   ELEMENTS
 ========================================= */
 
 const input =
@@ -753,44 +737,280 @@ document.getElementById(
     "chat"
 );
 
+const status =
+document.getElementById(
+    "status"
+);
 
-/* TIME */
+const loginBox =
+document.getElementById(
+    "loginBox"
+);
 
-function getTime(){
+const loginError =
+document.getElementById(
+    "loginError"
+);
 
-    const now =
-    new Date();
 
-    return now.toLocaleTimeString(
-        [],
-        {
-            hour:"2-digit",
-            minute:"2-digit"
+/* =========================================
+   USER
+========================================= */
+
+let currentUser = null;
+
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(user){
+
+            currentUser =
+            user;
+
+            loginBox.style.display =
+            "none";
+
+            status.textContent =
+            "Online";
+
+            loadMessages();
+
+        }
+
+        else{
+
+            currentUser =
+            null;
+
+            loginBox.style.display =
+            "flex";
+
+            status.textContent =
+            "Login required";
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+window.loginUser =
+async function(){
+
+    const email =
+    document.getElementById(
+        "emailInput"
+    ).value.trim();
+
+    const password =
+    document.getElementById(
+        "passwordInput"
+    ).value;
+
+
+    loginError.textContent =
+    "";
+
+
+    if(!email || !password){
+
+        loginError.textContent =
+        "Email and password দিন।";
+
+        return;
+
+    }
+
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        loginError.textContent =
+        "Login failed: " +
+        error.message;
+
+    }
+
+};
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+window.logoutUser =
+async function(){
+
+    closeProfileMenu();
+
+    await signOut(auth);
+
+};
+
+
+/* =========================================
+   LOAD REAL-TIME CHAT
+========================================= */
+
+function loadMessages(){
+
+    const q =
+    query(
+        messagesRef,
+        orderBy(
+            "createdAt",
+            "asc"
+        )
+    );
+
+
+    onSnapshot(
+        q,
+        function(snapshot){
+
+            chat.innerHTML =
+            "";
+
+
+            snapshot.forEach(
+                function(doc){
+
+                    const data =
+                    doc.data();
+
+                    showMessage(
+                        data
+                    );
+
+                }
+            );
+
+
+            scrollChat();
+
+        },
+
+        function(error){
+
+            console.error(
+                "Firestore error:",
+                error
+            );
+
+            status.textContent =
+            "Chat connection error";
+
         }
     );
 
 }
 
 
-/* SCROLL */
+/* =========================================
+   SHOW MESSAGE
+========================================= */
 
-function scrollChat(){
+function showMessage(data){
 
-    requestAnimationFrame(() => {
+    const message =
+    document.createElement(
+        "div"
+    );
 
-        chat.scrollTop =
-        chat.scrollHeight;
 
-    });
+    const mine =
+    currentUser &&
+    data.uid ===
+    currentUser.uid;
+
+
+    message.className =
+    mine
+    ? "message me"
+    : "message pori";
+
+
+    let time =
+    "Now";
+
+
+    if(data.createdAt){
+
+        try{
+
+            time =
+            data.createdAt
+            .toDate()
+            .toLocaleTimeString(
+                [],
+                {
+                    hour:"2-digit",
+                    minute:"2-digit"
+                }
+            );
+
+        }
+
+        catch(error){}
+
+    }
+
+
+    message.innerHTML = `
+
+        ${escapeHTML(
+            data.text || ""
+        )}
+
+        <div class="time">
+
+            ${time}
+
+            ${
+                mine
+                ? '<span class="seen">✓✓</span>'
+                : ''
+            }
+
+        </div>
+
+    `;
+
+
+    chat.appendChild(
+        message
+    );
 
 }
 
 
 /* =========================================
-   SEND TEXT
+   SEND MESSAGE
 ========================================= */
 
-function sendMessage(){
+window.sendMessage =
+async function(){
 
     const text =
     input.value.trim();
@@ -801,46 +1021,61 @@ function sendMessage(){
     }
 
 
-    const message =
-    document.createElement(
-        "div"
-    );
+    if(!currentUser){
+
+        alert(
+            "আগে login করো।"
+        );
+
+        return;
+
+    }
 
 
-    message.className =
-    "message me";
+    /* Clear immediately */
 
-
-    message.innerHTML = `
-        ${escapeHTML(text)}
-
-        <div class="time">
-            ${getTime()}
-            <span class="seen">✓✓</span>
-        </div>
-    `;
-
-
-    chat.appendChild(
-        message
-    );
-
-
-    /* CLEAR INPUT IMMEDIATELY */
-
-    input.value = "";
-
-
-    /* KEEP FOCUS */
+    input.value =
+    "";
 
     input.focus();
 
 
-    /* INSTANT SCROLL */
+    try{
 
-    scrollChat();
+        await addDoc(
+            messagesRef,
+            {
 
-}
+                text:
+                text,
+
+                uid:
+                currentUser.uid,
+
+                email:
+                currentUser.email || "",
+
+                createdAt:
+                serverTimestamp()
+
+            }
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+        alert(
+            "Message send হয়নি।"
+        );
+
+    }
+
+};
 
 
 /* =========================================
@@ -855,7 +1090,7 @@ input.addEventListener(
 
             e.preventDefault();
 
-            sendMessage();
+            window.sendMessage();
 
         }
 
@@ -864,23 +1099,21 @@ input.addEventListener(
 
 
 /* =========================================
-   FILE PICKER
+   FILE
 ========================================= */
 
-function openFilePicker(){
+window.openFilePicker =
+function(){
 
     document.getElementById(
         "fileInput"
     ).click();
 
-}
+};
 
 
-/* =========================================
-   SEND FILE / IMAGE
-========================================= */
-
-function handleFile(event){
+window.handleFile =
+function(event){
 
     const file =
     event.target.files[0];
@@ -888,6 +1121,21 @@ function handleFile(event){
 
     if(!file){
         return;
+    }
+
+
+    if(
+        !file.type.startsWith(
+            "image/"
+        )
+    ){
+
+        alert(
+            "শুধু image select করো।"
+        );
+
+        return;
+
     }
 
 
@@ -908,43 +1156,25 @@ function handleFile(event){
         "message me";
 
 
-        if(
-            file.type.startsWith(
-                "image/"
-            )
-        ){
+        message.innerHTML = `
 
-            message.innerHTML = `
+            <img
+                class="sent-image"
+                src="${e.target.result}"
+                alt="Image"
+            >
 
-                <img
-                    class="sent-image"
-                    src="${e.target.result}"
-                    alt="Image"
-                >
+            <div class="time">
 
-                <div class="time">
-                    ${getTime()}
-                    <span class="seen">✓✓</span>
-                </div>
+                Now
 
-            `;
+                <span class="seen">
+                    ✓✓
+                </span>
 
-        }
+            </div>
 
-        else{
-
-            message.innerHTML = `
-
-                📎 ${escapeHTML(file.name)}
-
-                <div class="time">
-                    ${getTime()}
-                    <span class="seen">✓✓</span>
-                </div>
-
-            `;
-
-        }
+        `;
 
 
         chat.appendChild(
@@ -959,19 +1189,18 @@ function handleFile(event){
 
     reader.readAsDataURL(file);
 
+    event.target.value =
+    "";
 
-    /* RESET */
-
-    event.target.value = "";
-
-}
+};
 
 
 /* =========================================
    VOICE
 ========================================= */
 
-function sendVoice(){
+window.sendVoice =
+function(){
 
     const message =
     document.createElement(
@@ -988,8 +1217,13 @@ function sendVoice(){
         🎤 Voice message
 
         <div class="time">
-            ${getTime()}
-            <span class="seen">✓✓</span>
+
+            Now
+
+            <span class="seen">
+                ✓✓
+            </span>
+
         </div>
 
     `;
@@ -1002,11 +1236,29 @@ function sendVoice(){
 
     scrollChat();
 
+};
+
+
+/* =========================================
+   SCROLL
+========================================= */
+
+function scrollChat(){
+
+    requestAnimationFrame(
+        function(){
+
+            chat.scrollTop =
+            chat.scrollHeight;
+
+        }
+    );
+
 }
 
 
 /* =========================================
-   ESCAPE HTML
+   ESCAPE
 ========================================= */
 
 function escapeHTML(text){
@@ -1025,20 +1277,153 @@ function escapeHTML(text){
 
 }
 
+</script>
 
-/* =========================================
-   INITIAL SCROLL
-========================================= */
 
-window.addEventListener(
-    "load",
-    function(){
+<!-- =========================================
+     PROFILE SYSTEM
+========================================= -->
 
-        chat.scrollTop =
-        chat.scrollHeight;
+<script>
+
+const profilePic =
+document.getElementById(
+    "profilePic"
+);
+
+
+const defaultProfile =
+"https://i.imgur.com/8Km9tLL.png";
+
+
+const savedProfile =
+localStorage.getItem(
+    "poriProfilePicture"
+);
+
+
+if(savedProfile){
+
+    profilePic.src =
+    savedProfile;
+
+}
+
+
+/* OPEN */
+
+function openProfileMenu(){
+
+    document.getElementById(
+        "profileMenu"
+    ).style.display =
+    "block";
+
+    document.getElementById(
+        "overlay"
+    ).style.display =
+    "block";
+
+}
+
+
+/* CLOSE */
+
+function closeProfileMenu(){
+
+    document.getElementById(
+        "profileMenu"
+    ).style.display =
+    "none";
+
+    document.getElementById(
+        "overlay"
+    ).style.display =
+    "none";
+
+}
+
+
+/* CHOOSE */
+
+function chooseProfilePicture(){
+
+    document.getElementById(
+        "profileInput"
+    ).click();
+
+}
+
+
+/* CHANGE */
+
+function changeProfilePicture(event){
+
+    const file =
+    event.target.files[0];
+
+
+    if(!file){
+        return;
+    }
+
+
+    if(
+        !file.type.startsWith(
+            "image/"
+        )
+    ){
+
+        alert(
+            "Please select an image."
+        );
+
+        return;
 
     }
-);
+
+
+    const reader =
+    new FileReader();
+
+
+    reader.onload =
+    function(e){
+
+        profilePic.src =
+        e.target.result;
+
+
+        localStorage.setItem(
+            "poriProfilePicture",
+            e.target.result
+        );
+
+
+        closeProfileMenu();
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* REMOVE */
+
+function removeProfilePicture(){
+
+    localStorage.removeItem(
+        "poriProfilePicture"
+    );
+
+    profilePic.src =
+    defaultProfile;
+
+    closeProfileMenu();
+
+}
 
 </script>
 
