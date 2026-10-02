@@ -1,1134 +1,426 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Pori ❤️ Chat</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
-
-<script>
-tailwind.config = {
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Hind Siliguri', 'Inter', 'sans-serif']
-            },
-            animation: {
-                messageIn: 'messageIn .35s cubic-bezier(.16,1,.3,1)',
-                pop: 'pop .25s ease-out',
-                glow: 'glow 2s infinite',
-                typing: 'typing 1.4s infinite ease-in-out',
-                pulseSoft: 'pulseSoft 2s infinite'
-            },
-            keyframes: {
-
-                messageIn: {
-                    '0%': {
-                        opacity: '0',
-                        transform: 'translateY(14px) scale(.96)'
-                    },
-                    '100%': {
-                        opacity: '1',
-                        transform: 'translateY(0) scale(1)'
-                    }
-                },
-
-                pop: {
-                    '0%': {
-                        transform: 'scale(.8)',
-                        opacity: '0'
-                    },
-                    '100%': {
-                        transform: 'scale(1)',
-                        opacity: '1'
-                    }
-                },
-
-                glow: {
-                    '0%,100%': {
-                        boxShadow: '0 0 15px rgba(236,72,153,.35)'
-                    },
-                    '50%': {
-                        boxShadow: '0 0 30px rgba(168,85,247,.7)'
-                    }
-                },
-
-                typing: {
-                    '0%,80%,100%': {
-                        transform: 'scale(.45)',
-                        opacity: '.45'
-                    },
-                    '40%': {
-                        transform: 'scale(1)',
-                        opacity: '1'
-                    }
-                },
-
-                pulseSoft: {
-                    '0%,100%': {
-                        opacity: '.65'
-                    },
-                    '50%': {
-                        opacity: '1'
-                    }
-                }
-            }
-        }
-    }
-};
-</script>
+<title>Pori - Chat App</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial, sans-serif;
 }
 
-html,
-body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
+body{
+  background:linear-gradient(135deg,#160b22,#32143f,#1b1028);
+  min-height:100vh;
+  color:white;
 }
 
-body {
-    font-family: 'Hind Siliguri', 'Inter', sans-serif;
-    background:
-        radial-gradient(circle at 10% 20%, rgba(236,72,153,.20), transparent 30%),
-        radial-gradient(circle at 90% 80%, rgba(139,92,246,.20), transparent 30%),
-        #05030a;
-    color: white;
-    overflow: hidden;
+.app{
+  width:100%;
+  max-width:480px;
+  height:100vh;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(20px);
+  overflow:hidden;
 }
 
-/* Scrollbar */
-
-::-webkit-scrollbar {
-    width: 5px;
+/* HEADER */
+.header{
+  height:75px;
+  display:flex;
+  align-items:center;
+  padding:10px 15px;
+  background:rgba(255,255,255,.09);
+  border-bottom:1px solid rgba(255,255,255,.12);
 }
 
-::-webkit-scrollbar-track {
-    background: transparent;
+.profile{
+  position:relative;
+  width:52px;
+  height:52px;
+  margin-right:12px;
+  cursor:pointer;
 }
 
-::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,.16);
-    border-radius: 20px;
+.profile img{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,.7);
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(236,72,153,.5);
+.online-dot{
+  position:absolute;
+  width:13px;
+  height:13px;
+  background:#25e56b;
+  border:2px solid #24102e;
+  border-radius:50%;
+  right:0;
+  bottom:1px;
 }
 
-/* Glass */
-
-.glass {
-    background: rgba(15,10,25,.70);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    border: 1px solid rgba(255,255,255,.10);
+.info h2{
+  font-size:18px;
 }
 
-.glass-light {
-    background: rgba(255,255,255,.055);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255,255,255,.08);
+.status{
+  font-size:12px;
+  color:#b8ffca;
+  margin-top:4px;
 }
 
-/* Background blobs */
-
-.blob {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    opacity: .30;
+/* CHAT */
+.chat{
+  flex:1;
+  overflow-y:auto;
+  padding:18px 14px 15px;
+  scroll-behavior:smooth;
 }
 
-.blob-one {
-    width: 280px;
-    height: 280px;
-    background: #ec4899;
-    top: -80px;
-    left: -80px;
+.message{
+  max-width:78%;
+  padding:10px 13px;
+  margin-bottom:8px;
+  border-radius:18px;
+  font-size:15px;
+  line-height:1.4;
+  word-wrap:break-word;
+  animation:messageIn .25s ease;
 }
 
-.blob-two {
-    width: 320px;
-    height: 320px;
-    background: #7c3aed;
-    bottom: -120px;
-    right: -100px;
+@keyframes messageIn{
+  from{
+    opacity:0;
+    transform:translateY(10px) scale(.97);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
 }
 
-/* Header */
-
-.header-gradient {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(236,72,153,.96),
-            rgba(147,51,234,.96),
-            rgba(79,70,229,.96)
-        );
+.message.pori{
+  background:rgba(255,255,255,.13);
+  border-bottom-left-radius:5px;
+  margin-right:auto;
 }
 
-/* Message bubbles */
-
-.sent-bubble {
-    background:
-        linear-gradient(
-            135deg,
-            #ec4899 0%,
-            #d946ef 45%,
-            #8b5cf6 100%
-        );
-
-    box-shadow:
-        0 8px 25px rgba(236,72,153,.20),
-        inset 0 1px 0 rgba(255,255,255,.18);
+.message.me{
+  background:linear-gradient(135deg,#ff4fa3,#9c4dff);
+  border-bottom-right-radius:5px;
+  margin-left:auto;
 }
 
-.received-bubble {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.105),
-            rgba(255,255,255,.045)
-        );
-
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    border: 1px solid rgba(255,255,255,.09);
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.12),
-        inset 0 1px 0 rgba(255,255,255,.06);
+.time{
+  font-size:10px;
+  opacity:.65;
+  margin-top:4px;
+  text-align:right;
 }
 
-/* Online pulse */
-
-.online-ring {
-    animation: glow 2s infinite;
+.seen{
+  font-size:10px;
+  opacity:.7;
+  margin-left:5px;
 }
 
-/* Input */
-
-.chat-input {
-    background: rgba(255,255,255,.075);
-    border: 1px solid rgba(255,255,255,.09);
-    transition: .25s;
+/* TYPING */
+.typing{
+  display:none;
+  width:max-content;
+  background:rgba(255,255,255,.12);
+  padding:8px 12px;
+  border-radius:15px;
+  margin-bottom:10px;
+  font-size:12px;
+  color:#ddd;
 }
 
-.chat-input:focus {
-    background: rgba(255,255,255,.10);
-    border-color: rgba(236,72,153,.55);
-    box-shadow: 0 0 0 3px rgba(236,72,153,.08);
+.dots span{
+  animation:blink 1.2s infinite;
 }
 
-/* Send button */
-
-.send-button {
-    background:
-        linear-gradient(
-            135deg,
-            #ec4899,
-            #d946ef,
-            #7c3aed
-        );
-
-    box-shadow:
-        0 8px 25px rgba(236,72,153,.30);
+.dots span:nth-child(2){
+  animation-delay:.2s;
 }
 
-/* typing */
-
-.typing-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #f472b6;
-    display: block;
-    animation: typing 1.4s infinite ease-in-out;
+.dots span:nth-child(3){
+  animation-delay:.4s;
 }
 
-.typing-dot:nth-child(2) {
-    animation-delay: .18s;
+@keyframes blink{
+  0%,100%{opacity:.2}
+  50%{opacity:1}
 }
 
-.typing-dot:nth-child(3) {
-    animation-delay: .36s;
+/* INPUT AREA */
+.input-area{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px;
+  background:rgba(255,255,255,.08);
+  border-top:1px solid rgba(255,255,255,.1);
 }
 
-/* message animation */
-
-.message-animation {
-    animation: messageIn .35s cubic-bezier(.16,1,.3,1);
+.icon-btn{
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  color:white;
+  font-size:19px;
+  cursor:pointer;
 }
 
-/* Hide */
-
-.hidden {
-    display: none !important;
+.input{
+  flex:1;
+  height:42px;
+  border:none;
+  outline:none;
+  border-radius:22px;
+  padding:0 16px;
+  color:white;
+  background:rgba(255,255,255,.12);
 }
 
+.input::placeholder{
+  color:#bbb;
+}
+
+.send{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff4fa3,#9c4dff);
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+}
+
+input[type="file"]{
+  display:none;
+}
+
+/* PROFILE MENU */
+.profile-menu{
+  position:fixed;
+  display:none;
+  z-index:20;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:290px;
+  padding:20px;
+  border-radius:22px;
+  background:rgba(35,18,45,.96);
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  text-align:center;
+}
+
+.profile-menu h3{
+  margin-bottom:15px;
+}
+
+.profile-menu button{
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  border:none;
+  border-radius:12px;
+  color:white;
+  background:linear-gradient(135deg,#ff4fa3,#9c4dff);
+  cursor:pointer;
+}
+
+.profile-menu .cancel{
+  background:rgba(255,255,255,.1);
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  z-index:19;
+  background:rgba(0,0,0,.5);
+}
 </style>
 </head>
 
 <body>
 
-<!-- Ambient background -->
-
-<div class="blob blob-one"></div>
-<div class="blob blob-two"></div>
-
-
-<!-- Main App -->
-
-<div
-class="relative z-10 w-full h-full sm:h-[92vh] sm:max-w-md sm:rounded-[28px] overflow-hidden glass shadow-2xl flex flex-col">
-
-    <!-- HEADER -->
-
-    <header
-    class="header-gradient shrink-0 px-4 py-3 flex items-center justify-between shadow-xl border-b border-white/10">
-
-        <div class="flex items-center gap-3">
-
-            <!-- Back -->
-
-            <button
-            onclick="goBack()"
-            class="w-9 h-9 rounded-full hover:bg-white/10 active:scale-90 transition flex items-center justify-center">
-
-                <i class="fa-solid fa-arrow-left"></i>
-
-            </button>
-
-
-            <!-- Profile -->
-
-            <div
-            onclick="toggleProfile()"
-            class="relative cursor-pointer active:scale-95 transition">
-
-                <div
-                class="w-11 h-11 rounded-full p-[2px] bg-gradient-to-tr from-yellow-300 via-pink-300 to-purple-400 online-ring">
-
-                    <img
-                    id="headerAvatar"
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
-                    class="w-full h-full rounded-full object-cover"
-                    alt="Pori">
-
-                </div>
-
-                <span
-                id="statusDot"
-                class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-purple-900 bg-emerald-400">
-                </span>
-
-            </div>
-
-
-            <!-- Name -->
-
-            <div
-            onclick="toggleProfile()"
-            class="cursor-pointer">
-
-                <div class="flex items-center gap-1">
-
-                    <h1
-                    class="font-bold text-[18px] leading-none">
-                        Pori
-                    </h1>
-
-                    <span class="text-sm">
-                        ❤️
-                    </span>
-
-                </div>
-
-                <div
-                id="statusText"
-                class="text-[11px] text-white/80 mt-1 flex items-center gap-1">
-
-                    <span
-                    class="w-1.5 h-1.5 rounded-full bg-emerald-300">
-                    </span>
-
-                    <span>
-                        Online
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- Header buttons -->
-
-        <div class="flex items-center gap-1">
-
-            <button
-            onclick="simulateCall('Audio')"
-            title="Call"
-            class="w-9 h-9 rounded-full hover:bg-white/10 active:scale-90 transition flex items-center justify-center">
-
-                <i class="fa-solid fa-phone text-sm"></i>
-
-            </button>
-
-
-            <button
-            onclick="simulateCall('Video')"
-            title="Video"
-            class="w-9 h-9 rounded-full hover:bg-white/10 active:scale-90 transition flex items-center justify-center">
-
-                <i class="fa-solid fa-video text-sm"></i>
-
-            </button>
-
-
-            <button
-            onclick="toggleSettings()"
-            class="w-9 h-9 rounded-full hover:bg-white/10 active:scale-90 transition flex items-center justify-center">
-
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-
-            </button>
-
-        </div>
-
-    </header>
-
-
-    <!-- SETTINGS -->
-
-    <div
-    id="settingsMenu"
-    class="hidden absolute z-50 right-3 top-16 w-52 rounded-2xl glass shadow-2xl overflow-hidden">
-
-        <button
-        onclick="toggleManualStatus()"
-        class="w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition text-left">
-
-            <i class="fa-solid fa-circle-half-stroke text-pink-400"></i>
-
-            <span>
-                Toggle Status
-            </span>
-
-        </button>
-
-
-        <button
-        onclick="clearChat()"
-        class="w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition text-left text-rose-300 border-t border-white/5">
-
-            <i class="fa-solid fa-trash"></i>
-
-            <span>
-                Clear Chat
-            </span>
-
-        </button>
-
-
-        <button
-        onclick="resetChat()"
-        class="w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition text-left border-t border-white/5">
-
-            <i class="fa-solid fa-rotate-left text-purple-400"></i>
-
-            <span>
-                Reset Chat
-            </span>
-
-        </button>
-
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <div class="profile" onclick="openProfileMenu()">
+      <img id="profilePic"
+           src="https://i.imgur.com/8Km9tLL.png"
+           alt="Pori">
+      <div class="online-dot"></div>
     </div>
 
-
-    <!-- CHAT -->
-
-    <main
-    id="chatContainer"
-    class="flex-1 overflow-y-auto px-3 py-4 space-y-2 bg-black/10">
-
-    </main>
-
-
-    <!-- Typing -->
-
-    <div
-    id="typingIndicator"
-    class="hidden px-4 py-2 bg-black/20 border-t border-white/5">
-
-        <div class="flex items-center gap-2">
-
-            <div class="flex gap-1">
-
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-
-            </div>
-
-            <span
-            class="text-xs text-pink-300 italic animate-pulse">
-                Pori is typing...
-            </span>
-
-        </div>
-
+    <div class="info">
+      <h2>Pori</h2>
+      <div class="status" id="status">Online</div>
     </div>
 
+  </div>
 
-    <!-- EMOJI PICKER -->
+  <!-- CHAT -->
+  <div class="chat" id="chat">
 
-    <div
-    id="emojiPicker"
-    class="hidden shrink-0 glass border-t border-white/10 p-3">
-
-        <div class="grid grid-cols-7 gap-1">
-
-            <button onclick="addEmoji('🥺')">🥺</button>
-            <button onclick="addEmoji('❤️')">❤️</button>
-            <button onclick="addEmoji('😍')">😍</button>
-            <button onclick="addEmoji('😭')">😭</button>
-            <button onclick="addEmoji('😘')">😘</button>
-            <button onclick="addEmoji('🙈')">🙈</button>
-            <button onclick="addEmoji('✨')">✨</button>
-
-            <button onclick="addEmoji('😊')">😊</button>
-            <button onclick="addEmoji('😒')">😒</button>
-            <button onclick="addEmoji('🔥')">🔥</button>
-            <button onclick="addEmoji('🌸')">🌸</button>
-            <button onclick="addEmoji('😴')">😴</button>
-            <button onclick="addEmoji('💕')">💕</button>
-            <button onclick="addEmoji('👀')">👀</button>
-
-            <button onclick="addEmoji('💗')">💗</button>
-            <button onclick="addEmoji('💞')">💞</button>
-            <button onclick="addEmoji('🥰')">🥰</button>
-            <button onclick="addEmoji('😚')">😚</button>
-            <button onclick="addEmoji('🤭')">🤭</button>
-            <button onclick="addEmoji('😢')">😢</button>
-            <button onclick="addEmoji('🫶')">🫶</button>
-
-        </div>
-
+    <div class="message pori">
+      Hii ❤️
+      <div class="time">Now</div>
     </div>
 
-
-    <!-- INPUT -->
-
-    <footer
-    class="shrink-0 p-3 glass border-t border-white/10">
-
-        <div class="flex items-center gap-2">
-
-            <!-- Attachment -->
-
-            <button
-            onclick="triggerFileUpload()"
-            class="w-10 h-10 rounded-full text-white/55 hover:text-pink-400 hover:bg-white/10 active:scale-90 transition flex items-center justify-center">
-
-                <i class="fa-solid fa-paperclip"></i>
-
-            </button>
-
-            <input
-            type="file"
-            id="fileInput"
-            accept="image/*"
-            class="hidden"
-            onchange="handleFile(event)">
-
-
-            <!-- Input -->
-
-            <div class="flex-1 relative">
-
-                <input
-                id="messageInput"
-                type="text"
-                placeholder="একটা মেসেজ লেখো... ❤️"
-                autocomplete="off"
-                class="chat-input w-full rounded-full text-sm text-white placeholder-white/35 px-4 py-3 pr-11 outline-none"
-                oninput="updateSendButton()"
-                onkeydown="handleEnter(event)">
-
-
-                <!-- Emoji -->
-
-                <button
-                onclick="toggleEmoji()"
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-pink-400 hover:scale-110 transition">
-
-                    <i class="fa-regular fa-face-smile text-lg"></i>
-
-                </button>
-
-            </div>
-
-
-            <!-- Send -->
-
-            <button
-            id="sendBtn"
-            onclick="sendMessage()"
-            class="send-button w-11 h-11 rounded-full flex items-center justify-center active:scale-90 transition">
-
-                <i class="fa-solid fa-paper-plane text-sm"></i>
-
-            </button>
-
-
-            <!-- Voice -->
-
-            <button
-            id="voiceBtn"
-            onclick="sendVoice()"
-            class="hidden w-11 h-11 rounded-full bg-white/10 border border-white/10 text-pink-400 flex items-center justify-center active:scale-90 transition">
-
-                <i class="fa-solid fa-microphone"></i>
-
-            </button>
-
-        </div>
-
-    </footer>
-
-
-    <!-- PROFILE MODAL -->
-
-    <div
-    id="profileModal"
-    class="hidden absolute inset-0 z-[60] bg-black/70 backdrop-blur-xl flex items-center justify-center p-6">
-
-        <div
-        class="glass rounded-3xl p-6 w-full text-center animate-pop">
-
-            <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
-            class="w-28 h-28 rounded-full object-cover mx-auto border-4 border-pink-400/70 shadow-xl animate-glow">
-
-            <h2 class="text-2xl font-bold mt-4">
-                Pori ❤️
-            </h2>
-
-            <p
-            id="profileStatus"
-            class="text-sm text-emerald-300 mt-1">
-                Online
-            </p>
-
-            <button
-            onclick="toggleProfile()"
-            class="mt-6 px-6 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">
-
-                Close
-
-            </button>
-
-        </div>
-
+    <div class="message pori">
+      Ki korcho? 🥺
+      <div class="time">Now</div>
     </div>
 
+  </div>
 
-    <!-- CALL MODAL -->
+  <!-- INPUT -->
+  <div class="input-area">
 
-    <div
-    id="callModal"
-    class="hidden absolute inset-0 z-[70] bg-slate-950/95 backdrop-blur-2xl flex flex-col items-center justify-between p-8">
+    <button class="icon-btn" onclick="document.getElementById('fileInput').click()">📎</button>
 
-        <div class="pt-14 text-center">
+    <input
+      type="file"
+      id="fileInput"
+      accept="image/*,video/*"
+      onchange="handleFile(event)"
+    >
 
-            <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80"
-            class="w-32 h-32 rounded-full object-cover border-4 border-pink-500 mx-auto animate-glow">
+    <input
+      class="input"
+      id="messageInput"
+      type="text"
+      placeholder="Message..."
+      autocomplete="off"
+    >
 
-            <h2 class="text-2xl font-bold mt-5">
-                Pori ❤️
-            </h2>
+    <button class="icon-btn" onclick="sendVoice()">🎤</button>
 
-            <p
-            id="callLabel"
-            class="text-pink-300 mt-1 animate-pulse">
-                Calling...
-            </p>
+    <button class="send" onclick="sendMessage()">➤</button>
 
-        </div>
-
-
-        <button
-        onclick="endCall()"
-        class="w-16 h-16 rounded-full bg-rose-600 hover:bg-rose-700 active:scale-90 transition shadow-xl flex items-center justify-center">
-
-            <i class="fa-solid fa-phone-slash text-xl"></i>
-
-        </button>
-
-    </div>
+  </div>
 
 </div>
 
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeProfileMenu()"></div>
+
+<!-- PROFILE MENU -->
+<div class="profile-menu" id="profileMenu">
+
+  <h3>Profile Picture</h3>
+
+  <button onclick="chooseProfilePicture()">
+    📷 Change Profile Picture
+  </button>
+
+  <button onclick="removeProfilePicture()">
+    🗑️ Remove Picture
+  </button>
+
+  <button class="cancel" onclick="closeProfileMenu()">
+    Cancel
+  </button>
+
+</div>
+
+<input
+  type="file"
+  id="profileInput"
+  accept="image/*"
+  style="display:none"
+  onchange="changeProfilePicture(event)"
+>
 
 <script>
 
 /* =========================
-   DEFAULT MESSAGES
+   PROFILE PICTURE
 ========================= */
 
-const defaultMessages = [
-
-    {
-        id: 1,
-        sender: "user",
-        text: "Valo lagche na emnie 🥺",
-        time: "১১:৪১ AM",
-        status: "seen"
-    },
-
-    {
-        id: 2,
-        sender: "pori",
-        text: "Oh accha",
-        time: "১১:৪১ AM"
-    },
-
-    {
-        id: 3,
-        sender: "pori",
-        text: "Ghum theke uthcho kokhn?",
-        time: "১১:৪১ AM"
-    },
+const defaultProfile =
+"https://i.imgur.com/8Km9tLL.png";
 
-    {
-        id: 4,
-        sender: "user",
-        text: "Hm",
-        time: "১১:৪২ AM",
-        status: "seen"
-    },
+const profilePic =
+document.getElementById("profilePic");
 
-    {
-        id: 5,
-        sender: "user",
-        text: "Ki korcho?",
-        time: "১১:৪৩ AM",
-        status: "seen"
-    },
+const savedProfile =
+localStorage.getItem("poriProfilePicture");
 
-    {
-        id: 6,
-        sender: "user",
-        text: "Ghum theke 10 tay uthci",
-        time: "১১:৪৫ AM",
-        status: "seen"
-    },
+if(savedProfile){
+  profilePic.src = savedProfile;
+}
 
-    {
-        id: 7,
-        sender: "pori",
-        text: "Hi",
-        time: "০৪:১৭ PM"
-    },
+function openProfileMenu(){
+  document.getElementById("profileMenu").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
+}
 
-    {
-        id: 8,
-        sender: "pori",
-        text: "Hi",
-        time: "০৪:১৮ PM"
-    },
+function closeProfileMenu(){
+  document.getElementById("profileMenu").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+}
 
-    {
-        id: 9,
-        sender: "pori",
-        text: "Hf",
-        time: "০৪:১৮ PM"
-    },
+function chooseProfilePicture(){
+  document.getElementById("profileInput").click();
+}
 
-    {
-        id: 10,
-        sender: "pori",
-        text: "Hi",
-        time: "০৫:২২ PM"
-    },
+function changeProfilePicture(event){
 
-    {
-        id: 11,
-        sender: "user",
-        text: "??",
-        time: "০৫:৩৪ PM",
-        status: "sent"
-    }
+  const file = event.target.files[0];
 
-];
+  if(!file) return;
 
+  if(!file.type.startsWith("image/")){
+    alert("Please select an image.");
+    return;
+  }
 
-let messages = [...defaultMessages];
+  const reader = new FileReader();
 
-let isOnline = true;
+  reader.onload = function(e){
 
-let lastSeen = "০৩:১৫ PM";
+    profilePic.src = e.target.result;
 
+    localStorage.setItem(
+      "poriProfilePicture",
+      e.target.result
+    );
 
-/* =========================
-   AUTO REPLIES
-========================= */
+    closeProfileMenu();
+  };
 
-const replies = [
+  reader.readAsDataURL(file);
+}
 
-    "Ki hoise bolba to? 🥺",
+function removeProfilePicture(){
 
-    "Hm bolo, suntsi... ❤️",
+  localStorage.removeItem("poriProfilePicture");
 
-    "Kothay gele bolo? 🙈",
+  profilePic.src = defaultProfile;
 
-    "Mon kharap keno tomar?",
-
-    "Accha shono, ektu busy achi ekhon ❤️",
-
-    "Khae neso kokhn?",
-
-    "Ami achi to, bolo... 🥺",
-
-    "Hmm bujhte parchi ❤️",
-
-    "Ektu por call dio, okey? 😘"
-
-];
-
-
-/* =========================
-   PAGE LOAD
-========================= */
-
-window.addEventListener("load", () => {
-
-    renderMessages();
-
-    updateStatus();
-
-    updateSendButton();
-
-});
-
-
-/* =========================
-   RENDER MESSAGES
-========================= */
-
-function renderMessages() {
-
-    const container =
-        document.getElementById("chatContainer");
-
-    container.innerHTML = "";
-
-
-    messages.forEach((msg, index) => {
-
-        const isUser =
-            msg.sender === "user";
-
-        const previous =
-            messages[index - 1];
-
-        const next =
-            messages[index + 1];
-
-
-        const sameAsPrevious =
-            previous &&
-            previous.sender === msg.sender;
-
-
-        const sameAsNext =
-            next &&
-            next.sender === msg.sender;
-
-
-        const wrapper =
-            document.createElement("div");
-
-        wrapper.className =
-            `flex ${
-                isUser
-                    ? "justify-end"
-                    : "justify-start"
-            } message-animation`;
-
-
-        /* =========================
-           MESSAGE ROW
-        ========================= */
-
-        const row =
-            document.createElement("div");
-
-        row.className =
-            `flex items-end gap-2 max-w-[86%] ${
-                isUser
-                    ? "flex-row-reverse"
-                    : ""
-            }`;
-
-
-        /* Avatar only for first message
-           in a message group */
-
-        let avatarHTML = "";
-
-        if (!isUser && !sameAsPrevious) {
-
-            avatarHTML = `
-
-                <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
-                class="w-7 h-7 rounded-full object-cover border border-white/10 mb-1 shrink-0">
-
-            `;
-
-        } else if (!isUser) {
-
-            avatarHTML = `
-                <div class="w-7 h-7 shrink-0"></div>
-            `;
-
-        }
-
-
-        /* Bubble radius */
-
-        let radius = "rounded-2xl";
-
-        if (isUser) {
-
-            if (sameAsPrevious && sameAsNext) {
-
-                radius =
-                    "rounded-2xl rounded-r-md";
-
-            } else if (sameAsPrevious) {
-
-                radius =
-                    "rounded-2xl rounded-tr-md";
-
-            } else if (sameAsNext) {
-
-                radius =
-                    "rounded-2xl rounded-br-md";
-
-            }
-
-        } else {
-
-            if (sameAsPrevious && sameAsNext) {
-
-                radius =
-                    "rounded-2xl rounded-l-md";
-
-            } else if (sameAsPrevious) {
-
-                radius =
-                    "rounded-2xl rounded-tl-md";
-
-            } else if (sameAsNext) {
-
-                radius =
-                    "rounded-2xl rounded-bl-md";
-
-            }
-
-        }
-
-
-        let content = "";
-
-
-        /* IMAGE */
-
-        if (msg.type === "image") {
-
-            content = `
-
-                <img
-                src="${msg.mediaUrl}"
-                class="rounded-xl max-w-[220px] max-h-[260px] object-cover border border-white/10"
-                alt="Image">
-
-            `;
-
-        }
-
-
-        /* AUDIO */
-
-        else if (msg.type === "audio") {
-
-            content = `
-
-                <div class="flex items-center gap-3 min-w-[190px]">
-
-                    <button
-                    onclick="playVoice(this)"
-                    class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 active:scale-90 transition">
-
-                        <i class="fa-solid fa-play text-xs"></i>
-
-                    </button>
-
-                    <div class="flex-1">
-
-                        <div class="h-1.5 bg-white/20 rounded-full overflow-hidden">
-
-                            <div
-                            class="h-full w-[42%] bg-white rounded-full">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <span class="text-[10px] opacity-70">
-                        0:04
-                    </span>
-
-                </div>
-
-            `;
-
-        }
-
-
-        /* TEXT */
-
-        else {
-
-            content = `
-
-                <p class="text-[14px] leading-relaxed break-words">
-                    ${escapeHTML(msg.text)}
-                </p>
-
-            `;
-
-        }
-
-
-        /* Status */
-
-        let statusHTML = "";
-
-        if (isUser) {
-
-            let icon = "fa-check";
-
-            let statusText = "Sent";
-
-            if (msg.status === "delivered") {
-
-                icon = "fa-check-double";
-                statusText = "Delivered";
-
-            }
-
-            if (msg.status === "seen") {
-
-                icon = "fa-check-double";
-                statusText = "Seen";
-
-            }
-
-
-            statusHTML = `
-
-                <span class="text-[9px] ${
-                    msg.status === "seen"
-                        ? "text-pink-200"
-                        : "text-white/55"
-                } flex items-center gap-1">
-
-                    <i class="fa-solid ${icon}"></i>
-
-                    ${statusText}
-
-                </span>
-
-            `;
-
-        }
-
-
-        /* Time only at end of group */
-
-        let timeHTML = "";
-
-        if (!sameAsNext) {
-
-            timeHTML = `
-
-                <div class="flex justify-end items-center gap-1 mt-1 opacity-70">
-
-                    <span class="text-[9px]">
-                        ${msg.time}
-                    </span>
-
-                    ${statusHTML}
-
-                </div>
-
-            `;
-
-        }
-
-
-        row.innerHTML = `
-
-            ${avatarHTML}
-
-            <div
-            class="${
-                isUser
-                    ? "sent-bubble"
-                    : "received-bubble"
-            } ${radius} px-3.5 py-2.5 shadow-lg">
-
-                ${content}
-
-                ${timeHTML}
-
-            </div>
-
-        `;
-
-
-        wrapper.appendChild(row);
-
-        container.appendChild(wrapper);
-
-    });
-
-
-    scrollBottom();
-
+  closeProfileMenu();
 }
 
 
@@ -1136,643 +428,162 @@ function renderMessages() {
    SEND MESSAGE
 ========================= */
 
-function sendMessage() {
+const input =
+document.getElementById("messageInput");
 
-    const input =
-        document.getElementById("messageInput");
+const chat =
+document.getElementById("chat");
 
-    const text =
-        input.value.trim();
+function getTime(){
 
-    if (!text) return;
+  const now = new Date();
+
+  return now.toLocaleTimeString([],{
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+
+}
+
+function sendMessage(){
+
+  const text = input.value.trim();
+
+  if(!text) return;
+
+  const message =
+  document.createElement("div");
+
+  message.className = "message me";
+
+  message.innerHTML = `
+    ${escapeHTML(text)}
+    <div class="time">
+      ${getTime()}
+      <span class="seen">✓✓</span>
+    </div>
+  `;
+
+  chat.appendChild(message);
+
+  input.value = "";
+
+  chat.scrollTop = chat.scrollHeight;
+
+}
 
 
-    messages.push({
+/* ENTER TO SEND */
 
-        id: Date.now(),
+input.addEventListener("keydown",function(e){
 
-        sender: "user",
+  if(e.key === "Enter"){
+    e.preventDefault();
+    sendMessage();
+  }
 
-        text: text,
-
-        time: formatTime(),
-
-        status: "sent"
-
-    });
+});
 
 
-    input.value = "";
+/* =========================
+   VOICE BUTTON
+========================= */
 
-    updateSendButton();
+function sendVoice(){
 
-    closeEmoji();
+  const message =
+  document.createElement("div");
 
-    renderMessages();
+  message.className = "message me";
 
-    simulateReply();
+  message.innerHTML = `
+    🎤 Voice message
+    <div class="time">
+      ${getTime()}
+      <span class="seen">✓✓</span>
+    </div>
+  `;
 
+  chat.appendChild(message);
+
+  chat.scrollTop = chat.scrollHeight;
 }
 
 
 /* =========================
-   PORI REPLY
+   FILE / IMAGE
 ========================= */
 
-function simulateReply() {
-
-    /* delivered */
-
-    setTimeout(() => {
-
-        messages.forEach(msg => {
-
-            if (
-                msg.sender === "user" &&
-                msg.status === "sent"
-            ) {
-
-                msg.status = "delivered";
-
-            }
-
-        });
-
-        isOnline = true;
-
-        updateStatus();
-
-        renderMessages();
-
-    }, 700);
-
-
-    /* typing */
-
-    setTimeout(() => {
-
-        document
-        .getElementById("typingIndicator")
-        .classList.remove("hidden");
-
-        scrollBottom();
-
-    }, 1400);
-
-
-    /* reply */
-
-    setTimeout(() => {
-
-        document
-        .getElementById("typingIndicator")
-        .classList.add("hidden");
-
-
-        messages.forEach(msg => {
-
-            if (msg.sender === "user") {
-
-                msg.status = "seen";
-
-            }
-
-        });
-
-
-        const reply =
-            replies[
-                Math.floor(
-                    Math.random() * replies.length
-                )
-            ];
-
-
-        messages.push({
-
-            id: Date.now(),
-
-            sender: "pori",
-
-            text: reply,
-
-            time: formatTime()
-
-        });
-
-
-        renderMessages();
-
-        isOnline = true;
-
-        updateStatus();
-
-
-        /* Go offline after some time */
-
-        setTimeout(() => {
-
-            isOnline = false;
-
-            lastSeen = formatTime();
-
-            updateStatus();
-
-        }, 7000);
-
-
-    }, 3500);
-
-}
-
-
-/* =========================
-   VOICE MESSAGE
-========================= */
-
-function sendVoice() {
-
-    messages.push({
-
-        id: Date.now(),
-
-        sender: "user",
-
-        type: "audio",
-
-        time: formatTime(),
-
-        status: "sent"
-
-    });
-
-
-    renderMessages();
-
-    simulateReply();
-
-}
-
-
-function playVoice(button) {
-
-    const icon =
-        button.querySelector("i");
-
-    icon.className =
-        "fa-solid fa-pause text-xs";
-
-
-    setTimeout(() => {
-
-        icon.className =
-            "fa-solid fa-play text-xs";
-
-    }, 2000);
-
-}
-
-
-/* =========================
-   FILE
-========================= */
-
-function triggerFileUpload() {
-
-    document
-        .getElementById("fileInput")
-        .click();
-
-}
-
-
-function handleFile(event) {
-
-    const file =
-        event.target.files[0];
-
-    if (!file) return;
-
-
-    if (!file.type.startsWith("image/")) {
-
-        alert("শুধু Image file পাঠাতে পারবে।");
-
-        return;
+function handleFile(event){
+
+  const file = event.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+
+    const message =
+    document.createElement("div");
+
+    message.className = "message me";
+
+    if(file.type.startsWith("image/")){
+
+      message.innerHTML = `
+        <img
+          src="${e.target.result}"
+          style="
+            max-width:220px;
+            max-height:260px;
+            border-radius:14px;
+            display:block;
+          "
+        >
+        <div class="time">
+          ${getTime()}
+          <span class="seen">✓✓</span>
+        </div>
+      `;
+
+    }else{
+
+      message.innerHTML = `
+        📎 ${escapeHTML(file.name)}
+        <div class="time">
+          ${getTime()}
+          <span class="seen">✓✓</span>
+        </div>
+      `;
 
     }
 
+    chat.appendChild(message);
 
-    const reader =
-        new FileReader();
+    chat.scrollTop = chat.scrollHeight;
 
+  };
 
-    reader.onload = function(e) {
+  reader.readAsDataURL(file);
 
-        messages.push({
-
-            id: Date.now(),
-
-            sender: "user",
-
-            type: "image",
-
-            mediaUrl: e.target.result,
-
-            time: formatTime(),
-
-            status: "sent"
-
-        });
-
-
-        renderMessages();
-
-        simulateReply();
-
-    };
-
-
-    reader.readAsDataURL(file);
+  event.target.value = "";
 
 }
 
 
 /* =========================
-   EMOJI
+   SECURITY
 ========================= */
 
-function toggleEmoji() {
+function escapeHTML(text){
 
-    document
-        .getElementById("emojiPicker")
-        .classList.toggle("hidden");
+  const div =
+  document.createElement("div");
 
-}
+  div.textContent = text;
 
-
-function closeEmoji() {
-
-    document
-        .getElementById("emojiPicker")
-        .classList.add("hidden");
-
-}
-
-
-function addEmoji(emoji) {
-
-    const input =
-        document.getElementById("messageInput");
-
-    input.value += emoji;
-
-    input.focus();
-
-    updateSendButton();
-
-}
-
-
-/* =========================
-   INPUT
-========================= */
-
-function updateSendButton() {
-
-    const input =
-        document.getElementById("messageInput");
-
-    const send =
-        document.getElementById("sendBtn");
-
-    const voice =
-        document.getElementById("voiceBtn");
-
-
-    if (input.value.trim()) {
-
-        send.classList.remove("hidden");
-
-        voice.classList.add("hidden");
-
-    } else {
-
-        send.classList.add("hidden");
-
-        voice.classList.remove("hidden");
-
-    }
-
-}
-
-
-function handleEnter(event) {
-
-    if (event.key === "Enter") {
-
-        event.preventDefault();
-
-        sendMessage();
-
-    }
-
-}
-
-
-/* =========================
-   STATUS
-========================= */
-
-function updateStatus() {
-
-    const dot =
-        document.getElementById("statusDot");
-
-    const text =
-        document.getElementById("statusText");
-
-
-    const profileStatus =
-        document.getElementById("profileStatus");
-
-
-    if (isOnline) {
-
-        dot.className =
-            "absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-purple-900 bg-emerald-400";
-
-
-        text.innerHTML = `
-
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
-
-            <span>Online</span>
-
-        `;
-
-
-        if (profileStatus) {
-
-            profileStatus.innerText =
-                "Online";
-
-            profileStatus.className =
-                "text-sm text-emerald-300 mt-1";
-
-        }
-
-    } else {
-
-        dot.className =
-            "absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-purple-900 bg-slate-500";
-
-
-        text.innerHTML = `
-
-            <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
-
-            <span>Offline • ${lastSeen}</span>
-
-        `;
-
-
-        if (profileStatus) {
-
-            profileStatus.innerText =
-                `Offline • ${lastSeen}`;
-
-            profileStatus.className =
-                "text-sm text-slate-400 mt-1";
-
-        }
-
-    }
-
-}
-
-
-/* =========================
-   SETTINGS
-========================= */
-
-function toggleSettings() {
-
-    document
-        .getElementById("settingsMenu")
-        .classList.toggle("hidden");
-
-}
-
-
-function toggleManualStatus() {
-
-    isOnline = !isOnline;
-
-    if (!isOnline) {
-
-        lastSeen = formatTime();
-
-    }
-
-    updateStatus();
-
-    toggleSettings();
-
-}
-
-
-function clearChat() {
-
-    messages = [];
-
-    renderMessages();
-
-    toggleSettings();
-
-}
-
-
-function resetChat() {
-
-    messages = [...defaultMessages];
-
-    renderMessages();
-
-    toggleSettings();
-
-}
-
-
-/* =========================
-   PROFILE
-========================= */
-
-function toggleProfile() {
-
-    document
-        .getElementById("profileModal")
-        .classList.toggle("hidden");
-
-}
-
-
-/* =========================
-   CALL
-========================= */
-
-function simulateCall(type) {
-
-    document
-        .getElementById("callLabel")
-        .innerText =
-            `${type} Calling...`;
-
-    document
-        .getElementById("callModal")
-        .classList.remove("hidden");
-
-}
-
-
-function endCall() {
-
-    document
-        .getElementById("callModal")
-        .classList.add("hidden");
-
-}
-
-
-/* =========================
-   BACK
-========================= */
-
-function goBack() {
-
-    if (history.length > 1) {
-
-        history.back();
-
-    } else {
-
-        alert("Back button pressed");
-
-    }
-
-}
-
-
-/* =========================
-   TIME
-========================= */
-
-function formatTime() {
-
-    const date = new Date();
-
-    let hours =
-        date.getHours();
-
-    let minutes =
-        date.getMinutes();
-
-    const ampm =
-        hours >= 12
-            ? "PM"
-            : "AM";
-
-
-    hours =
-        hours % 12 || 12;
-
-
-    minutes =
-        minutes < 10
-            ? "0" + minutes
-            : minutes;
-
-
-    const time =
-        `${hours}:${minutes} ${ampm}`;
-
-
-    return bengaliNumbers(time);
-
-}
-
-
-/* =========================
-   BENGALI NUMBERS
-========================= */
-
-function bengaliNumbers(str) {
-
-    const numbers = {
-
-        "0":"০",
-        "1":"১",
-        "2":"২",
-        "3":"৩",
-        "4":"৪",
-        "5":"৫",
-        "6":"৬",
-        "7":"৭",
-        "8":"৮",
-        "9":"৯"
-
-    };
-
-
-    return str.replace(
-        /[0-9]/g,
-        number => numbers[number]
-    );
-
-}
-
-
-/* =========================
-   ESCAPE HTML
-========================= */
-
-function escapeHTML(text) {
-
-    return text
-
-        .replace(/&/g, "&amp;")
-
-        .replace(/</g, "&lt;")
-
-        .replace(/>/g, "&gt;")
-
-        .replace(/"/g, "&quot;")
-
-        .replace(/'/g, "&#039;");
-
-}
-
-
-/* =========================
-   SCROLL
-========================= */
-
-function scrollBottom() {
-
-    const container =
-        document.getElementById("chatContainer");
-
-    setTimeout(() => {
-
-        container.scrollTo({
-
-            top: container.scrollHeight,
-
-            behavior: "smooth"
-
-        });
-
-    }, 50);
+  return div.innerHTML;
 
 }
 
