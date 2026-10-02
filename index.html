@@ -19,10 +19,12 @@ body{
     width:100%;
     height:100vh;
     overflow:hidden;
+
     background:
         radial-gradient(circle at top left,#6d245f 0%,transparent 40%),
         radial-gradient(circle at bottom right,#39206c 0%,transparent 45%),
         #130b1d;
+
     color:white;
 }
 
@@ -31,14 +33,20 @@ body{
     max-width:500px;
     height:100vh;
     margin:auto;
+
     display:flex;
     flex-direction:column;
+
     background:rgba(255,255,255,.05);
     backdrop-filter:blur(18px);
+
     overflow:hidden;
 }
 
-/* HEADER */
+
+/* =========================
+   HEADER
+========================= */
 
 .header{
     height:72px;
@@ -53,32 +61,30 @@ body{
     border-bottom:1px solid rgba(255,255,255,.12);
 }
 
-.profile{
-    width:52px;
-    height:52px;
-    position:relative;
+.logo{
+    width:50px;
+    height:50px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     margin-right:12px;
-    cursor:pointer;
-}
 
-.profile img{
-    width:52px;
-    height:52px;
     border-radius:50%;
-    object-fit:cover;
-    border:2px solid rgba(255,255,255,.75);
-    background:#33213b;
-}
 
-.online-dot{
-    width:13px;
-    height:13px;
-    position:absolute;
-    right:0;
-    bottom:1px;
-    background:#20e66a;
-    border:2px solid #211126;
-    border-radius:50%;
+    background:
+        linear-gradient(
+            135deg,
+            #ff3f9f,
+            #984cff
+        );
+
+    font-size:21px;
+    font-weight:bold;
+
+    box-shadow:
+        0 5px 20px rgba(255,63,159,.25);
 }
 
 .info h2{
@@ -92,12 +98,18 @@ body{
     color:#a9ffc4;
 }
 
-/* CHAT */
+
+/* =========================
+   CHAT
+========================= */
 
 .chat{
     flex:1;
+
     overflow-y:auto;
+
     padding:15px 13px 12px;
+
     scroll-behavior:smooth;
 }
 
@@ -110,16 +122,24 @@ body{
     border-radius:10px;
 }
 
-/* MESSAGE */
+
+/* =========================
+   MESSAGE
+========================= */
 
 .message{
     max-width:78%;
+
     padding:9px 12px;
     margin-bottom:7px;
+
     border-radius:18px;
+
     font-size:15px;
     line-height:1.4;
+
     word-break:break-word;
+
     animation:messageIn .15s ease-out;
 }
 
@@ -139,24 +159,31 @@ body{
 
 .message.pori{
     margin-right:auto;
+
     background:rgba(255,255,255,.12);
+
     border-bottom-left-radius:5px;
 }
 
 .message.me{
     margin-left:auto;
-    background:linear-gradient(
-        135deg,
-        #ff3f9f,
-        #984cff
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3f9f,
+            #984cff
+        );
+
     border-bottom-right-radius:5px;
 }
 
 .time{
     margin-top:3px;
+
     font-size:9px;
     text-align:right;
+
     opacity:.65;
 }
 
@@ -164,58 +191,43 @@ body{
     margin-left:4px;
 }
 
-.message img.sent-image{
-    display:block;
-    max-width:220px;
-    max-height:280px;
-    border-radius:13px;
-    object-fit:cover;
-}
 
-/* INPUT */
+/* =========================
+   INPUT
+========================= */
 
 .input-area{
     width:100%;
+
     display:flex;
     align-items:center;
-    gap:7px;
+
+    gap:8px;
+
     padding:9px;
+
     background:rgba(255,255,255,.08);
+
     border-top:1px solid rgba(255,255,255,.1);
-}
-
-.icon-btn{
-    width:40px;
-    height:40px;
-    flex-shrink:0;
-    border:none;
-    border-radius:50%;
-    background:rgba(255,255,255,.11);
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    transition:.15s;
-}
-
-.icon-btn:active{
-    transform:scale(.9);
 }
 
 .input{
     flex:1;
     min-width:0;
+
     height:42px;
+
     border:none;
     outline:none;
+
     border-radius:22px;
+
     padding:0 15px;
+
     background:rgba(255,255,255,.11);
+
     color:white;
+
     font-size:15px;
 }
 
@@ -226,7 +238,9 @@ body{
 .send{
     width:42px;
     height:42px;
+
     flex-shrink:0;
+
     border:none;
     border-radius:50%;
 
@@ -238,8 +252,11 @@ body{
         );
 
     color:white;
+
     font-size:18px;
+
     cursor:pointer;
+
     transition:.12s;
 }
 
@@ -247,81 +264,20 @@ body{
     transform:scale(.88);
 }
 
-.hidden-file{
-    display:none;
-}
 
-/* PROFILE MENU */
-
-.overlay{
-    position:fixed;
-    inset:0;
-    display:none;
-    background:rgba(0,0,0,.55);
-    z-index:50;
-}
-
-.profile-menu{
-    width:290px;
-    position:fixed;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-
-    padding:20px;
-    display:none;
-    z-index:60;
-
-    text-align:center;
-
-    border-radius:22px;
-
-    background:
-        rgba(37,19,48,.97);
-
-    border:1px solid rgba(255,255,255,.14);
-
-    box-shadow:
-        0 20px 70px rgba(0,0,0,.55);
-}
-
-.profile-menu h3{
-    margin-bottom:13px;
-    font-size:18px;
-}
-
-.profile-menu button{
-    width:100%;
-    padding:12px;
-    margin-top:8px;
-    border:none;
-    border-radius:12px;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff3f9f,
-            #984cff
-        );
-
-    font-size:14px;
-    cursor:pointer;
-}
-
-.profile-menu .cancel{
-    background:rgba(255,255,255,.1);
-}
-
-/* LOGIN */
+/* =========================
+   LOGIN
+========================= */
 
 .login-box{
     position:fixed;
+
     inset:0;
+
     z-index:100;
 
     display:none;
+
     align-items:center;
     justify-content:center;
 
@@ -358,7 +314,9 @@ body{
 
 .login-card p{
     font-size:12px;
+
     color:#bbb;
+
     margin-bottom:18px;
 }
 
@@ -391,6 +349,7 @@ body{
     margin-top:12px;
 
     border:none;
+
     border-radius:13px;
 
     color:white;
@@ -409,7 +368,9 @@ body{
 
 .login-error{
     margin-top:10px;
+
     font-size:12px;
+
     color:#ff9fbd;
 }
 
@@ -420,7 +381,9 @@ body{
 <body>
 
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
 <div
     class="login-box"
@@ -468,33 +431,26 @@ body{
 </div>
 
 
-<!-- APP -->
+<!-- =========================
+     APP
+========================= -->
 
 <div class="app">
+
 
     <!-- HEADER -->
 
     <div class="header">
 
-        <div
-            class="profile"
-            onclick="openProfileMenu()"
-        >
-
-            <img
-                id="profilePic"
-                src="https://i.imgur.com/8Km9tLL.png"
-                alt="Pori"
-            >
-
-            <div class="online-dot"></div>
-
+        <div class="logo">
+            P
         </div>
-
 
         <div class="info">
 
-            <h2>Pori</h2>
+            <h2>
+                Pori
+            </h2>
 
             <div
                 class="status"
@@ -520,23 +476,6 @@ body{
 
     <div class="input-area">
 
-        <button
-            class="icon-btn"
-            onclick="openFilePicker()"
-            type="button"
-        >
-            📎
-        </button>
-
-        <input
-            type="file"
-            id="fileInput"
-            class="hidden-file"
-            accept="image/*"
-            onchange="handleFile(event)"
-        >
-
-
         <input
             id="messageInput"
             class="input"
@@ -544,16 +483,6 @@ body{
             placeholder="Message..."
             autocomplete="off"
         >
-
-
-        <button
-            class="icon-btn"
-            onclick="sendVoice()"
-            type="button"
-        >
-            🎤
-        </button>
-
 
         <button
             class="send"
@@ -568,72 +497,9 @@ body{
 </div>
 
 
-<!-- OVERLAY -->
-
-<div
-    class="overlay"
-    id="overlay"
-    onclick="closeProfileMenu()"
-></div>
-
-
-<!-- PROFILE MENU -->
-
-<div
-    class="profile-menu"
-    id="profileMenu"
->
-
-    <h3>
-        Pori Profile
-    </h3>
-
-
-    <button
-        onclick="chooseProfilePicture()"
-    >
-        📷 Change Profile Picture
-    </button>
-
-
-    <button
-        onclick="removeProfilePicture()"
-    >
-        🗑️ Remove Picture
-    </button>
-
-
-    <button
-        onclick="logoutUser()"
-    >
-        🚪 Logout
-    </button>
-
-
-    <button
-        class="cancel"
-        onclick="closeProfileMenu()"
-    >
-        Cancel
-    </button>
-
-</div>
-
-
-<!-- PROFILE FILE -->
-
-<input
-    type="file"
-    id="profileInput"
-    class="hidden-file"
-    accept="image/*"
-    onchange="changeProfilePicture(event)"
->
-
-
-<!-- =========================================
+<!-- =========================
      FIREBASE
-========================================= -->
+========================= -->
 
 <script type="module">
 
@@ -667,9 +533,9 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* =========================================
-   YOUR FIREBASE CONFIG
-========================================= */
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
 const firebaseConfig = {
 
@@ -696,23 +562,23 @@ const firebaseConfig = {
 };
 
 
-/* START FIREBASE */
+/* =========================
+   START FIREBASE
+========================= */
 
 const app =
 initializeApp(firebaseConfig);
 
-
 const auth =
 getAuth(app);
-
 
 const db =
 getFirestore(app);
 
 
-/* =========================================
+/* =========================
    CHAT ROOM
-========================================= */
+========================= */
 
 const messagesRef =
 collection(
@@ -723,9 +589,9 @@ collection(
 );
 
 
-/* =========================================
+/* =========================
    ELEMENTS
-========================================= */
+========================= */
 
 const input =
 document.getElementById(
@@ -753,16 +619,18 @@ document.getElementById(
 );
 
 
-/* =========================================
+/* =========================
    USER
-========================================= */
+========================= */
 
 let currentUser = null;
 
+let unsubscribeMessages = null;
 
-/* =========================================
-   AUTH STATE
-========================================= */
+
+/* =========================
+   AUTH
+========================= */
 
 onAuthStateChanged(
     auth,
@@ -794,15 +662,18 @@ onAuthStateChanged(
             status.textContent =
             "Login required";
 
+            chat.innerHTML =
+            "";
+
         }
 
     }
 );
 
 
-/* =========================================
+/* =========================
    LOGIN
-========================================= */
+========================= */
 
 window.loginUser =
 async function(){
@@ -816,7 +687,6 @@ async function(){
     document.getElementById(
         "passwordInput"
     ).value;
-
 
     loginError.textContent =
     "";
@@ -847,33 +717,25 @@ async function(){
         console.error(error);
 
         loginError.textContent =
-        "Login failed: " +
-        error.message;
+        "Login failed.";
 
     }
 
 };
 
 
-/* =========================================
-   LOGOUT
-========================================= */
-
-window.logoutUser =
-async function(){
-
-    closeProfileMenu();
-
-    await signOut(auth);
-
-};
-
-
-/* =========================================
-   LOAD REAL-TIME CHAT
-========================================= */
+/* =========================
+   LOAD CHAT
+========================= */
 
 function loadMessages(){
+
+    if(unsubscribeMessages){
+
+        unsubscribeMessages();
+
+    }
+
 
     const q =
     query(
@@ -885,8 +747,10 @@ function loadMessages(){
     );
 
 
+    unsubscribeMessages =
     onSnapshot(
         q,
+
         function(snapshot){
 
             chat.innerHTML =
@@ -896,11 +760,8 @@ function loadMessages(){
             snapshot.forEach(
                 function(doc){
 
-                    const data =
-                    doc.data();
-
                     showMessage(
-                        data
+                        doc.data()
                     );
 
                 }
@@ -927,9 +788,9 @@ function loadMessages(){
 }
 
 
-/* =========================================
+/* =========================
    SHOW MESSAGE
-========================================= */
+========================= */
 
 function showMessage(data){
 
@@ -1005,9 +866,9 @@ function showMessage(data){
 }
 
 
-/* =========================================
+/* =========================
    SEND MESSAGE
-========================================= */
+========================= */
 
 window.sendMessage =
 async function(){
@@ -1017,7 +878,9 @@ async function(){
 
 
     if(!text){
+
         return;
+
     }
 
 
@@ -1031,8 +894,6 @@ async function(){
 
     }
 
-
-    /* Clear immediately */
 
     input.value =
     "";
@@ -1078,15 +939,18 @@ async function(){
 };
 
 
-/* =========================================
+/* =========================
    ENTER SEND
-========================================= */
+========================= */
 
 input.addEventListener(
     "keydown",
     function(e){
 
-        if(e.key === "Enter"){
+        if(
+            e.key ===
+            "Enter"
+        ){
 
             e.preventDefault();
 
@@ -1098,150 +962,9 @@ input.addEventListener(
 );
 
 
-/* =========================================
-   FILE
-========================================= */
-
-window.openFilePicker =
-function(){
-
-    document.getElementById(
-        "fileInput"
-    ).click();
-
-};
-
-
-window.handleFile =
-function(event){
-
-    const file =
-    event.target.files[0];
-
-
-    if(!file){
-        return;
-    }
-
-
-    if(
-        !file.type.startsWith(
-            "image/"
-        )
-    ){
-
-        alert(
-            "শুধু image select করো।"
-        );
-
-        return;
-
-    }
-
-
-    const reader =
-    new FileReader();
-
-
-    reader.onload =
-    function(e){
-
-        const message =
-        document.createElement(
-            "div"
-        );
-
-
-        message.className =
-        "message me";
-
-
-        message.innerHTML = `
-
-            <img
-                class="sent-image"
-                src="${e.target.result}"
-                alt="Image"
-            >
-
-            <div class="time">
-
-                Now
-
-                <span class="seen">
-                    ✓✓
-                </span>
-
-            </div>
-
-        `;
-
-
-        chat.appendChild(
-            message
-        );
-
-
-        scrollChat();
-
-    };
-
-
-    reader.readAsDataURL(file);
-
-    event.target.value =
-    "";
-
-};
-
-
-/* =========================================
-   VOICE
-========================================= */
-
-window.sendVoice =
-function(){
-
-    const message =
-    document.createElement(
-        "div"
-    );
-
-
-    message.className =
-    "message me";
-
-
-    message.innerHTML = `
-
-        🎤 Voice message
-
-        <div class="time">
-
-            Now
-
-            <span class="seen">
-                ✓✓
-            </span>
-
-        </div>
-
-    `;
-
-
-    chat.appendChild(
-        message
-    );
-
-
-    scrollChat();
-
-};
-
-
-/* =========================================
+/* =========================
    SCROLL
-========================================= */
+========================= */
 
 function scrollChat(){
 
@@ -1257,9 +980,9 @@ function scrollChat(){
 }
 
 
-/* =========================================
-   ESCAPE
-========================================= */
+/* =========================
+   SECURITY
+========================= */
 
 function escapeHTML(text){
 
@@ -1268,10 +991,8 @@ function escapeHTML(text){
         "div"
     );
 
-
     div.textContent =
     text;
-
 
     return div.innerHTML;
 
@@ -1280,152 +1001,5 @@ function escapeHTML(text){
 </script>
 
 
-<!-- =========================================
-     PROFILE SYSTEM
-========================================= -->
-
-<script>
-
-const profilePic =
-document.getElementById(
-    "profilePic"
-);
-
-
-const defaultProfile =
-"https://i.imgur.com/8Km9tLL.png";
-
-
-const savedProfile =
-localStorage.getItem(
-    "poriProfilePicture"
-);
-
-
-if(savedProfile){
-
-    profilePic.src =
-    savedProfile;
-
-}
-
-
-/* OPEN */
-
-function openProfileMenu(){
-
-    document.getElementById(
-        "profileMenu"
-    ).style.display =
-    "block";
-
-    document.getElementById(
-        "overlay"
-    ).style.display =
-    "block";
-
-}
-
-
-/* CLOSE */
-
-function closeProfileMenu(){
-
-    document.getElementById(
-        "profileMenu"
-    ).style.display =
-    "none";
-
-    document.getElementById(
-        "overlay"
-    ).style.display =
-    "none";
-
-}
-
-
-/* CHOOSE */
-
-function chooseProfilePicture(){
-
-    document.getElementById(
-        "profileInput"
-    ).click();
-
-}
-
-
-/* CHANGE */
-
-function changeProfilePicture(event){
-
-    const file =
-    event.target.files[0];
-
-
-    if(!file){
-        return;
-    }
-
-
-    if(
-        !file.type.startsWith(
-            "image/"
-        )
-    ){
-
-        alert(
-            "Please select an image."
-        );
-
-        return;
-
-    }
-
-
-    const reader =
-    new FileReader();
-
-
-    reader.onload =
-    function(e){
-
-        profilePic.src =
-        e.target.result;
-
-
-        localStorage.setItem(
-            "poriProfilePicture",
-            e.target.result
-        );
-
-
-        closeProfileMenu();
-
-    };
-
-
-    reader.readAsDataURL(file);
-
-}
-
-
-/* REMOVE */
-
-function removeProfilePicture(){
-
-    localStorage.removeItem(
-        "poriProfilePicture"
-    );
-
-    profilePic.src =
-    defaultProfile;
-
-    closeProfileMenu();
-
-}
-
-</script>
-
 </body>
-</html>
+    </html>
