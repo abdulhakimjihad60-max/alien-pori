@@ -75,6 +75,10 @@ body{
     box-shadow:0 5px 20px rgba(255,63,159,.25);
 }
 
+.info{
+    flex:1;
+}
+
 .info h2{
     font-size:18px;
     font-weight:600;
@@ -89,7 +93,6 @@ body{
 /* CALL BUTTONS */
 
 .call-buttons{
-    margin-left:auto;
     display:flex;
     gap:7px;
 }
@@ -97,13 +100,10 @@ body{
 .call-btn{
     width:38px;
     height:38px;
-
     border:0;
     border-radius:50%;
-
-    background:rgba(255,255,255,.12);
+    background:rgba(255,255,255,.11);
     color:white;
-
     font-size:17px;
     cursor:pointer;
 }
@@ -117,11 +117,8 @@ body{
 .chat{
     flex:1;
     min-height:0;
-
     overflow-y:auto;
-
     padding:15px 13px 12px;
-
     scroll-behavior:smooth;
 }
 
@@ -138,17 +135,12 @@ body{
 
 .message{
     max-width:78%;
-
     padding:9px 12px;
     margin-bottom:7px;
-
     border-radius:18px;
-
     font-size:15px;
     line-height:1.4;
-
     word-break:break-word;
-
     animation:messageIn .15s ease-out;
 }
 
@@ -157,7 +149,6 @@ body{
         opacity:0;
         transform:translateY(4px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
@@ -165,20 +156,4 @@ body{
 }
 
 .message.pori{
-    margin-right:auto;
-    background:rgba(255,255,255,.12);
-    border-bottom-left-radius:5px;
-}
-
-.message.me{
-    margin-left:auto;
-
-    background:linear-gradient(135deg,#ff3f9f,#984cff);
-
-    border-bottom-right-radius:5px;
-}
-
-.time{
-    margin-top:3px;
-    font-size:9px;
-    text-align:right
+    margin
