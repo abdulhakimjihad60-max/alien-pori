@@ -4,1071 +4,1777 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Alien ❤️ Pori</title>
+<title>Pori ❤️ Chat</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Hind Siliguri', 'Inter', 'sans-serif']
+            },
+            animation: {
+                messageIn: 'messageIn .35s cubic-bezier(.16,1,.3,1)',
+                pop: 'pop .25s ease-out',
+                glow: 'glow 2s infinite',
+                typing: 'typing 1.4s infinite ease-in-out',
+                pulseSoft: 'pulseSoft 2s infinite'
+            },
+            keyframes: {
+
+                messageIn: {
+                    '0%': {
+                        opacity: '0',
+                        transform: 'translateY(14px) scale(.96)'
+                    },
+                    '100%': {
+                        opacity: '1',
+                        transform: 'translateY(0) scale(1)'
+                    }
+                },
+
+                pop: {
+                    '0%': {
+                        transform: 'scale(.8)',
+                        opacity: '0'
+                    },
+                    '100%': {
+                        transform: 'scale(1)',
+                        opacity: '1'
+                    }
+                },
+
+                glow: {
+                    '0%,100%': {
+                        boxShadow: '0 0 15px rgba(236,72,153,.35)'
+                    },
+                    '50%': {
+                        boxShadow: '0 0 30px rgba(168,85,247,.7)'
+                    }
+                },
+
+                typing: {
+                    '0%,80%,100%': {
+                        transform: 'scale(.45)',
+                        opacity: '.45'
+                    },
+                    '40%': {
+                        transform: 'scale(1)',
+                        opacity: '1'
+                    }
+                },
+
+                pulseSoft: {
+                    '0%,100%': {
+                        opacity: '.65'
+                    },
+                    '50%': {
+                        opacity: '1'
+                    }
+                }
+            }
+        }
+    }
+};
+</script>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+
+* {
+    box-sizing: border-box;
 }
 
-body{
-  height:100vh;
-  overflow:hidden;
-  font-family:Arial,sans-serif;
-  background:radial-gradient(circle,#4b126b,#160021 55%,#050008);
-  color:white;
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
-/* LOGIN */
-
-.login{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+body {
+    font-family: 'Hind Siliguri', 'Inter', sans-serif;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(236,72,153,.20), transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(139,92,246,.20), transparent 30%),
+        #05030a;
+    color: white;
+    overflow: hidden;
 }
 
-.login-box{
-  width:100%;
-  max-width:360px;
-  padding:35px 25px;
-  text-align:center;
-  border-radius:25px;
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(15px);
-  box-shadow:0 0 35px rgba(255,20,147,.35);
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 5px;
 }
 
-.login-heart{
-  font-size:65px;
-  animation:beat 1.2s infinite;
+::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-@keyframes beat{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.15)}
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.16);
+    border-radius: 20px;
 }
 
-.login-box h1{
-  margin:15px 0 8px;
-  font-size:30px;
-  text-shadow:0 0 20px #ff1493;
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(236,72,153,.5);
 }
 
-.login-box p{
-  margin-bottom:25px;
-  opacity:.8;
+/* Glass */
+
+.glass {
+    background: rgba(15,10,25,.70);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(255,255,255,.10);
 }
 
-input{
-  width:100%;
-  padding:15px;
-  margin:8px 0;
-  border:none;
-  outline:none;
-  border-radius:30px;
-  background:rgba(255,255,255,.12);
-  color:white;
-  font-size:16px;
+.glass-light {
+    background: rgba(255,255,255,.055);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,.08);
 }
 
-input::placeholder{
-  color:#ddd;
+/* Background blobs */
+
+.blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    opacity: .30;
 }
 
-.login-btn{
-  width:100%;
-  padding:14px;
-  margin-top:15px;
-  border:none;
-  border-radius:30px;
-  color:white;
-  font-size:17px;
-  background:linear-gradient(90deg,#ff1493,#8a2be2);
-  box-shadow:0 0 20px rgba(255,20,147,.5);
-  cursor:pointer;
+.blob-one {
+    width: 280px;
+    height: 280px;
+    background: #ec4899;
+    top: -80px;
+    left: -80px;
 }
 
-#error{
-  color:#ff7b9c;
-  margin-top:15px;
-  min-height:20px;
+.blob-two {
+    width: 320px;
+    height: 320px;
+    background: #7c3aed;
+    bottom: -120px;
+    right: -100px;
 }
 
-/* HOME */
+/* Header */
 
-#website{
-  display:none;
-  height:100vh;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+.header-gradient {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(236,72,153,.96),
+            rgba(147,51,234,.96),
+            rgba(79,70,229,.96)
+        );
 }
 
-.home{
-  width:100%;
-  max-width:500px;
-  text-align:center;
+/* Message bubbles */
+
+.sent-bubble {
+    background:
+        linear-gradient(
+            135deg,
+            #ec4899 0%,
+            #d946ef 45%,
+            #8b5cf6 100%
+        );
+
+    box-shadow:
+        0 8px 25px rgba(236,72,153,.20),
+        inset 0 1px 0 rgba(255,255,255,.18);
 }
 
-.home-heart{
-  font-size:80px;
-  animation:beat 1.2s infinite;
+.received-bubble {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.105),
+            rgba(255,255,255,.045)
+        );
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,.09);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.12),
+        inset 0 1px 0 rgba(255,255,255,.06);
 }
 
-.home h1{
-  font-size:34px;
-  margin:15px 0;
-  text-shadow:0 0 20px #ff1493;
+/* Online pulse */
+
+.online-ring {
+    animation: glow 2s infinite;
 }
 
-.message{
-  padding:20px;
-  border-radius:20px;
-  background:rgba(255,255,255,.08);
-  margin:20px 0;
-  line-height:1.8;
+/* Input */
+
+.chat-input {
+    background: rgba(255,255,255,.075);
+    border: 1px solid rgba(255,255,255,.09);
+    transition: .25s;
 }
 
-.music-btn,
-.open-chat{
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border:none;
-  border-radius:30px;
-  color:white;
-  font-size:17px;
-  background:linear-gradient(90deg,#ff1493,#8a2be2);
-  cursor:pointer;
+.chat-input:focus {
+    background: rgba(255,255,255,.10);
+    border-color: rgba(236,72,153,.55);
+    box-shadow: 0 0 0 3px rgba(236,72,153,.08);
 }
 
-/* CHAT */
+/* Send button */
 
-#chatPage{
-  display:none;
-  width:100%;
-  max-width:500px;
-  height:90vh;
-  flex-direction:column;
-  border-radius:25px;
-  overflow:hidden;
-  background:rgba(20,0,30,.78);
-  backdrop-filter:blur(15px);
-  box-shadow:0 0 35px rgba(255,20,147,.3);
+.send-button {
+    background:
+        linear-gradient(
+            135deg,
+            #ec4899,
+            #d946ef,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 8px 25px rgba(236,72,153,.30);
 }
 
-.chat-header{
-  padding:15px;
-  text-align:center;
-  background:linear-gradient(90deg,#ff1493,#8a2be2);
+/* typing */
+
+.typing-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f472b6;
+    display: block;
+    animation: typing 1.4s infinite ease-in-out;
 }
 
-.chat-name{
-  font-size:20px;
-  font-weight:bold;
+.typing-dot:nth-child(2) {
+    animation-delay: .18s;
 }
 
-.status{
-  font-size:12px;
-  margin-top:4px;
-  opacity:.9;
+.typing-dot:nth-child(3) {
+    animation-delay: .36s;
 }
 
-.online{
-  color:#7cff9e;
+/* message animation */
+
+.message-animation {
+    animation: messageIn .35s cubic-bezier(.16,1,.3,1);
 }
 
-.typing{
-  color:#ffd1f0;
+/* Hide */
+
+.hidden {
+    display: none !important;
 }
 
-#messages{
-  flex:1;
-  padding:15px;
-  overflow-y:auto;
-}
-
-.msg{
-  max-width:75%;
-  padding:11px 14px;
-  margin:8px 0;
-  border-radius:18px;
-  word-wrap:break-word;
-}
-
-.my-msg{
-  margin-left:auto;
-  background:linear-gradient(135deg,#ff1493,#8a2be2);
-  border-bottom-right-radius:5px;
-}
-
-.other-msg{
-  margin-right:auto;
-  background:rgba(255,255,255,.13);
-  border-bottom-left-radius:5px;
-}
-
-.msg-time{
-  display:block;
-  font-size:10px;
-  opacity:.65;
-  margin-top:5px;
-  text-align:right;
-}
-
-.seen{
-  font-size:10px;
-  margin-left:5px;
-}
-
-.chat-input-area{
-  display:flex;
-  gap:8px;
-  padding:12px;
-  background:rgba(0,0,0,.25);
-}
-
-#messageInput{
-  flex:1;
-  margin:0;
-  text-align:left;
-}
-
-.send-btn{
-  width:55px;
-  border:none;
-  border-radius:50%;
-  background:#ff1493;
-  color:white;
-  font-size:20px;
-  cursor:pointer;
-}
-
-.back-btn{
-  margin:10px;
-  padding:10px;
-  border:none;
-  border-radius:20px;
-  background:rgba(255,255,255,.12);
-  color:white;
-  cursor:pointer;
-}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- Ambient background -->
 
-<div class="login" id="loginPage">
+<div class="blob blob-one"></div>
+<div class="blob blob-two"></div>
 
-  <div class="login-box">
 
-    <div class="login-heart">❤️</div>
+<!-- Main App -->
 
-    <h1>Alien ❤️ Pori</h1>
+<div
+class="relative z-10 w-full h-full sm:h-[92vh] sm:max-w-md sm:rounded-[28px] overflow-hidden glass shadow-2xl flex flex-col">
 
-    <p>শুধু আমাদের দুজনের জন্য... 💕</p>
+    <!-- HEADER -->
 
-    <input
-      type="email"
-      id="email"
-      placeholder="Email"
-    >
+    <header
+    class="header-gradient shrink-0 px-4 py-3 flex items-center justify-between shadow-xl border-b border-white/10">
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-    >
+        <div class="flex items-center gap-3">
 
-    <button class="login-btn" onclick="loginUser()">
-      💕 Login
-    </button>
+            <!-- Back -->
 
-    <button class="login-btn"
-      onclick="registerUser()"
-      style="margin-top:8px;">
-      ❤️ Create Account
-    </button>
+            <button
+            onclick="goBack()"
+            class="w-9 h-9 rounded-full hover:bg-white/10 active:scale-90 transition flex items-center justify-center">
 
-    <div id="error"></div>
+                <i class="fa-solid fa-arrow-left"></i>
 
-  </div>
+            </button>
+
+
+            <!-- Profile -->
+
+            <div
+            onclick="toggleProfile()"
+            class="relative cursor-pointer active:scale-95 transition">
+
+                <div
+                class="w-11 h-11 rounded-full p-[2px] bg-gradient-to-tr from-yellow-300 via-pink-300 to-purple-400 online-ring">
+
+                    <img
+                    id="headerAvatar"
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+                    class="w-full h-full rounded-full object-cover"
+                    alt="Pori">
+
+                </div>
+
+                <span
+                id="statusDot"
+                class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-purple-900 bg-emerald-400">
+                </span>
+
+            </div>
+
+
+            <!-- Name -->
+
+            <div
+            onclick="toggleProfile()"
+            class="cursor-pointer">
+
+                <div class="flex items-center gap-1">
+
+                    <h1
+                    class="font-bold text-[18px] leading-none">
+                        Pori
+                    </h1>
+
+                    <span class="text-sm">
+                        ❤️
+                    </span>
+
+                </div>
+
+                <div
+                id="statusText"
+                class="text-[11px] text-white/80 mt-1 flex items-center gap-1">
+
+                    <span
+                    class="w-1.5 h-1.5 rounded-full bg-emerald-300">
+                    </span>
+
+                    <span>
+                        Online
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Header buttons -->
+
+        <div class="flex items-center gap-1">
+
+            <button
+            onclick="simulateCall('Audio')"
+            title="Call"
+            class="w-9 h-9 rounded-full hover:bg-white/10 active:scale-90 transition flex items-center justify-center">
+
+                <i class="fa-solid fa-phone text-sm"></i>
+
+            </button>
+
+
+            <button
+            onclick="simulateCall('Video')"
+            title="Video"
+            class="w-9 h-9 rounded-full hover:bg-white/10 active:scale-90 transition flex items-center justify-center">
+
+                <i class="fa-solid fa-video text-sm"></i>
+
+            </button>
+
+
+            <button
+            onclick="toggleSettings()"
+            class="w-9 h-9 rounded-full hover:bg-white/10 active:scale-90 transition flex items-center justify-center">
+
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- SETTINGS -->
+
+    <div
+    id="settingsMenu"
+    class="hidden absolute z-50 right-3 top-16 w-52 rounded-2xl glass shadow-2xl overflow-hidden">
+
+        <button
+        onclick="toggleManualStatus()"
+        class="w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition text-left">
+
+            <i class="fa-solid fa-circle-half-stroke text-pink-400"></i>
+
+            <span>
+                Toggle Status
+            </span>
+
+        </button>
+
+
+        <button
+        onclick="clearChat()"
+        class="w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition text-left text-rose-300 border-t border-white/5">
+
+            <i class="fa-solid fa-trash"></i>
+
+            <span>
+                Clear Chat
+            </span>
+
+        </button>
+
+
+        <button
+        onclick="resetChat()"
+        class="w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition text-left border-t border-white/5">
+
+            <i class="fa-solid fa-rotate-left text-purple-400"></i>
+
+            <span>
+                Reset Chat
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <!-- CHAT -->
+
+    <main
+    id="chatContainer"
+    class="flex-1 overflow-y-auto px-3 py-4 space-y-2 bg-black/10">
+
+    </main>
+
+
+    <!-- Typing -->
+
+    <div
+    id="typingIndicator"
+    class="hidden px-4 py-2 bg-black/20 border-t border-white/5">
+
+        <div class="flex items-center gap-2">
+
+            <div class="flex gap-1">
+
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+
+            </div>
+
+            <span
+            class="text-xs text-pink-300 italic animate-pulse">
+                Pori is typing...
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- EMOJI PICKER -->
+
+    <div
+    id="emojiPicker"
+    class="hidden shrink-0 glass border-t border-white/10 p-3">
+
+        <div class="grid grid-cols-7 gap-1">
+
+            <button onclick="addEmoji('🥺')">🥺</button>
+            <button onclick="addEmoji('❤️')">❤️</button>
+            <button onclick="addEmoji('😍')">😍</button>
+            <button onclick="addEmoji('😭')">😭</button>
+            <button onclick="addEmoji('😘')">😘</button>
+            <button onclick="addEmoji('🙈')">🙈</button>
+            <button onclick="addEmoji('✨')">✨</button>
+
+            <button onclick="addEmoji('😊')">😊</button>
+            <button onclick="addEmoji('😒')">😒</button>
+            <button onclick="addEmoji('🔥')">🔥</button>
+            <button onclick="addEmoji('🌸')">🌸</button>
+            <button onclick="addEmoji('😴')">😴</button>
+            <button onclick="addEmoji('💕')">💕</button>
+            <button onclick="addEmoji('👀')">👀</button>
+
+            <button onclick="addEmoji('💗')">💗</button>
+            <button onclick="addEmoji('💞')">💞</button>
+            <button onclick="addEmoji('🥰')">🥰</button>
+            <button onclick="addEmoji('😚')">😚</button>
+            <button onclick="addEmoji('🤭')">🤭</button>
+            <button onclick="addEmoji('😢')">😢</button>
+            <button onclick="addEmoji('🫶')">🫶</button>
+
+        </div>
+
+    </div>
+
+
+    <!-- INPUT -->
+
+    <footer
+    class="shrink-0 p-3 glass border-t border-white/10">
+
+        <div class="flex items-center gap-2">
+
+            <!-- Attachment -->
+
+            <button
+            onclick="triggerFileUpload()"
+            class="w-10 h-10 rounded-full text-white/55 hover:text-pink-400 hover:bg-white/10 active:scale-90 transition flex items-center justify-center">
+
+                <i class="fa-solid fa-paperclip"></i>
+
+            </button>
+
+            <input
+            type="file"
+            id="fileInput"
+            accept="image/*"
+            class="hidden"
+            onchange="handleFile(event)">
+
+
+            <!-- Input -->
+
+            <div class="flex-1 relative">
+
+                <input
+                id="messageInput"
+                type="text"
+                placeholder="একটা মেসেজ লেখো... ❤️"
+                autocomplete="off"
+                class="chat-input w-full rounded-full text-sm text-white placeholder-white/35 px-4 py-3 pr-11 outline-none"
+                oninput="updateSendButton()"
+                onkeydown="handleEnter(event)">
+
+
+                <!-- Emoji -->
+
+                <button
+                onclick="toggleEmoji()"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-pink-400 hover:scale-110 transition">
+
+                    <i class="fa-regular fa-face-smile text-lg"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- Send -->
+
+            <button
+            id="sendBtn"
+            onclick="sendMessage()"
+            class="send-button w-11 h-11 rounded-full flex items-center justify-center active:scale-90 transition">
+
+                <i class="fa-solid fa-paper-plane text-sm"></i>
+
+            </button>
+
+
+            <!-- Voice -->
+
+            <button
+            id="voiceBtn"
+            onclick="sendVoice()"
+            class="hidden w-11 h-11 rounded-full bg-white/10 border border-white/10 text-pink-400 flex items-center justify-center active:scale-90 transition">
+
+                <i class="fa-solid fa-microphone"></i>
+
+            </button>
+
+        </div>
+
+    </footer>
+
+
+    <!-- PROFILE MODAL -->
+
+    <div
+    id="profileModal"
+    class="hidden absolute inset-0 z-[60] bg-black/70 backdrop-blur-xl flex items-center justify-center p-6">
+
+        <div
+        class="glass rounded-3xl p-6 w-full text-center animate-pop">
+
+            <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+            class="w-28 h-28 rounded-full object-cover mx-auto border-4 border-pink-400/70 shadow-xl animate-glow">
+
+            <h2 class="text-2xl font-bold mt-4">
+                Pori ❤️
+            </h2>
+
+            <p
+            id="profileStatus"
+            class="text-sm text-emerald-300 mt-1">
+                Online
+            </p>
+
+            <button
+            onclick="toggleProfile()"
+            class="mt-6 px-6 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- CALL MODAL -->
+
+    <div
+    id="callModal"
+    class="hidden absolute inset-0 z-[70] bg-slate-950/95 backdrop-blur-2xl flex flex-col items-center justify-between p-8">
+
+        <div class="pt-14 text-center">
+
+            <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80"
+            class="w-32 h-32 rounded-full object-cover border-4 border-pink-500 mx-auto animate-glow">
+
+            <h2 class="text-2xl font-bold mt-5">
+                Pori ❤️
+            </h2>
+
+            <p
+            id="callLabel"
+            class="text-pink-300 mt-1 animate-pulse">
+                Calling...
+            </p>
+
+        </div>
+
+
+        <button
+        onclick="endCall()"
+        class="w-16 h-16 rounded-full bg-rose-600 hover:bg-rose-700 active:scale-90 transition shadow-xl flex items-center justify-center">
+
+            <i class="fa-solid fa-phone-slash text-xl"></i>
+
+        </button>
+
+    </div>
 
 </div>
 
 
-<!-- WEBSITE -->
+<script>
 
-<div id="website">
+/* =========================
+   DEFAULT MESSAGES
+========================= */
 
-  <div class="home" id="homePage">
+const defaultMessages = [
 
-    <div class="home-heart">❤️</div>
+    {
+        id: 1,
+        sender: "user",
+        text: "Valo lagche na emnie 🥺",
+        time: "১১:৪১ AM",
+        status: "seen"
+    },
 
-    <h1 id="welcomeTitle">
-      Alien ❤️ Pori
-    </h1>
+    {
+        id: 2,
+        sender: "pori",
+        text: "Oh accha",
+        time: "১১:৪১ AM"
+    },
 
-    <div class="message">
-      কিছু মানুষ গল্পের মতো আসে,<br>
-      তারপর গল্পটাই সুন্দর করে দেয়... 💕
-    </div>
+    {
+        id: 3,
+        sender: "pori",
+        text: "Ghum theke uthcho kokhn?",
+        time: "১১:৪১ AM"
+    },
 
-    <button class="open-chat" onclick="openChat()">
-      💬 আমাদের Message
-    </button>
+    {
+        id: 4,
+        sender: "user",
+        text: "Hm",
+        time: "১১:৪২ AM",
+        status: "seen"
+    },
 
-    <button class="music-btn" onclick="playMusic()">
-      🎵 গান চালাও
-    </button>
+    {
+        id: 5,
+        sender: "user",
+        text: "Ki korcho?",
+        time: "১১:৪৩ AM",
+        status: "seen"
+    },
 
-    <audio id="music" loop>
-      <source src="Tum Hi Ho.mp3" type="audio/mpeg">
-    </audio>
+    {
+        id: 6,
+        sender: "user",
+        text: "Ghum theke 10 tay uthci",
+        time: "১১:৪৫ AM",
+        status: "seen"
+    },
 
-  </div>
+    {
+        id: 7,
+        sender: "pori",
+        text: "Hi",
+        time: "০৪:১৭ PM"
+    },
 
+    {
+        id: 8,
+        sender: "pori",
+        text: "Hi",
+        time: "০৪:১৮ PM"
+    },
 
-  <!-- CHAT -->
+    {
+        id: 9,
+        sender: "pori",
+        text: "Hf",
+        time: "০৪:১৮ PM"
+    },
 
-  <div id="chatPage">
+    {
+        id: 10,
+        sender: "pori",
+        text: "Hi",
+        time: "০৫:২২ PM"
+    },
 
-    <div class="chat-header">
+    {
+        id: 11,
+        sender: "user",
+        text: "??",
+        time: "০৫:৩৪ PM",
+        status: "sent"
+    }
 
-      <div class="chat-name">
-        ❤️ <span id="partnerName">Pori</span>
-      </div>
-
-      <div id="partnerStatus" class="status">
-        Offline
-      </div>
-
-    </div>
-
-
-    <div id="messages"></div>
-
-
-    <div class="chat-input-area">
-
-      <input
-        type="text"
-        id="messageInput"
-        placeholder="একটা মেসেজ লেখো... ❤️"
-        oninput="handleTyping()"
-        onkeydown="handleEnter(event)"
-      >
-
-      <button class="send-btn" onclick="sendMessage()">
-        ➤
-      </button>
-
-    </div>
-
-
-    <button class="back-btn" onclick="closeChat()">
-      ← Back
-    </button>
-
-  </div>
-
-</div>
+];
 
 
-<script type="module">
+let messages = [...defaultMessages];
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+let isOnline = true;
 
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  query,
-  orderBy,
-  onSnapshot,
-  serverTimestamp,
-  doc,
-  setDoc,
-  updateDoc,
-  arrayUnion,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+let lastSeen = "০৩:১৫ PM";
 
 
 /* =========================
-   FIREBASE
+   AUTO REPLIES
 ========================= */
 
-const firebaseConfig = {
-  apiKey: "AIzaSyB6DFVQNrPmKtshg978khg7GAKCrS69ANU",
-  authDomain: "alien-pori---chat.firebaseapp.com",
-  projectId: "alien-pori---chat",
-  storageBucket: "alien-pori---chat.firebasestorage.app",
-  messagingSenderId: "141609051933",
-  appId: "1:141609051933:web:7abdb1828986b5a29ee3f4",
-  measurementId: "G-KC5NKQ57H6"
-};
+const replies = [
 
-const app = initializeApp(firebaseConfig);
+    "Ki hoise bolba to? 🥺",
 
-const auth = getAuth(app);
+    "Hm bolo, suntsi... ❤️",
 
-const db = getFirestore(app);
+    "Kothay gele bolo? 🙈",
+
+    "Mon kharap keno tomar?",
+
+    "Accha shono, ektu busy achi ekhon ❤️",
+
+    "Khae neso kokhn?",
+
+    "Ami achi to, bolo... 🥺",
+
+    "Hmm bujhte parchi ❤️",
+
+    "Ektu por call dio, okey? 😘"
+
+];
 
 
 /* =========================
-   IMPORTANT
-   তোমাদের আসল দুই email এখানে বসাও
+   PAGE LOAD
 ========================= */
 
-const ALIEN_EMAIL = "alien@example.com";
+window.addEventListener("load", () => {
 
-const PORI_EMAIL = "pori@example.com";
+    renderMessages();
 
+    updateStatus();
 
-/* =========================
-   USER ROLE
-========================= */
-
-function getRole(email){
-
-  if(email.toLowerCase() === ALIEN_EMAIL.toLowerCase()){
-    return "Alien";
-  }
-
-  if(email.toLowerCase() === PORI_EMAIL.toLowerCase()){
-    return "Pori";
-  }
-
-  return null;
-}
-
-
-function getPartnerEmail(email){
-
-  if(email.toLowerCase() === ALIEN_EMAIL.toLowerCase()){
-    return PORI_EMAIL;
-  }
-
-  return ALIEN_EMAIL;
-}
-
-
-/* =========================
-   REGISTER
-========================= */
-
-window.registerUser = async function(){
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const password =
-    document.getElementById("password").value;
-
-  const error =
-    document.getElementById("error");
-
-  const role = getRole(email);
-
-  if(!role){
-
-    error.innerHTML =
-      "❌ এই website শুধু Alien ও Pori account-এর জন্য";
-
-    return;
-  }
-
-  if(password.length < 6){
-
-    error.innerHTML =
-      "❌ Password কমপক্ষে 6 characters হতে হবে";
-
-    return;
-  }
-
-  try{
-
-    await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-  }catch(err){
-
-    error.innerHTML =
-      "❌ " + err.message;
-
-  }
-
-};
-
-
-/* =========================
-   LOGIN
-========================= */
-
-window.loginUser = async function(){
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const password =
-    document.getElementById("password").value;
-
-  const error =
-    document.getElementById("error");
-
-  const role = getRole(email);
-
-  if(!role){
-
-    error.innerHTML =
-      "❌ শুধু Alien অথবা Pori account দিয়ে login করা যাবে";
-
-    return;
-  }
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-  }catch(err){
-
-    error.innerHTML =
-      "❌ " + err.message;
-
-  }
-
-};
-
-
-/* =========================
-   AUTH STATE
-========================= */
-
-onAuthStateChanged(auth, async(user)=>{
-
-  if(!user) return;
-
-  const role = getRole(user.email);
-
-  if(!role){
-
-    await auth.signOut();
-
-    return;
-  }
-
-  document.getElementById("loginPage").style.display =
-    "none";
-
-  document.getElementById("website").style.display =
-    "flex";
-
-  document.getElementById("welcomeTitle").innerHTML =
-    role === "Alien"
-      ? "Welcome Alien ❤️"
-      : "Welcome Pori ❤️";
-
-  document.getElementById("partnerName").innerText =
-    role === "Alien"
-      ? "Pori"
-      : "Alien";
-
-  startPresence(user);
-
-  loadPartnerStatus(user);
-
-  loadMessages(user);
+    updateSendButton();
 
 });
 
 
 /* =========================
-   ONLINE / OFFLINE
+   RENDER MESSAGES
 ========================= */
 
-let presenceTimer;
+function renderMessages() {
 
-async function startPresence(user){
+    const container =
+        document.getElementById("chatContainer");
 
-  const ref =
-    doc(db,"presence",user.uid);
-
-  await setDoc(
-    ref,
-    {
-      email:user.email,
-      role:getRole(user.email),
-      online:true,
-      lastSeen:serverTimestamp()
-    },
-    {merge:true}
-  );
-
-  clearInterval(presenceTimer);
-
-  presenceTimer = setInterval(async()=>{
-
-    if(auth.currentUser){
-
-      await updateDoc(ref,{
-        online:true,
-        lastSeen:serverTimestamp()
-      });
-
-    }
-
-  },20000);
+    container.innerHTML = "";
 
 
-  window.addEventListener("beforeunload",()=>{
+    messages.forEach((msg, index) => {
 
-    updateDoc(ref,{
-      online:false,
-      lastSeen:serverTimestamp()
-    });
+        const isUser =
+            msg.sender === "user";
 
-  });
+        const previous =
+            messages[index - 1];
 
-}
+        const next =
+            messages[index + 1];
 
 
-/* =========================
-   PARTNER STATUS
-========================= */
+        const sameAsPrevious =
+            previous &&
+            previous.sender === msg.sender;
 
-function loadPartnerStatus(user){
 
-  const partnerEmail =
-    getPartnerEmail(user.email);
+        const sameAsNext =
+            next &&
+            next.sender === msg.sender;
 
-  const partnerRole =
-    getRole(partnerEmail);
 
-  const statusBox =
-    document.getElementById("partnerStatus");
+        const wrapper =
+            document.createElement("div");
 
-  const q =
-    query(
-      collection(db,"presence")
-    );
+        wrapper.className =
+            `flex ${
+                isUser
+                    ? "justify-end"
+                    : "justify-start"
+            } message-animation`;
 
-  onSnapshot(q,(snapshot)=>{
 
-    let found = false;
+        /* =========================
+           MESSAGE ROW
+        ========================= */
 
-    snapshot.forEach(item=>{
+        const row =
+            document.createElement("div");
 
-      const data = item.data();
+        row.className =
+            `flex items-end gap-2 max-w-[86%] ${
+                isUser
+                    ? "flex-row-reverse"
+                    : ""
+            }`;
 
-      if(
-        data.email &&
-        data.email.toLowerCase() ===
-        partnerEmail.toLowerCase()
-      ){
 
-        found = true;
+        /* Avatar only for first message
+           in a message group */
 
-        if(data.online){
+        let avatarHTML = "";
 
-          statusBox.innerHTML =
-            "🟢 Online";
+        if (!isUser && !sameAsPrevious) {
 
-          statusBox.className =
-            "status online";
+            avatarHTML = `
 
-        }else{
+                <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+                class="w-7 h-7 rounded-full object-cover border border-white/10 mb-1 shrink-0">
 
-          let last = "";
+            `;
 
-          if(data.lastSeen){
+        } else if (!isUser) {
 
-            last =
-              data.lastSeen.toDate()
-              .toLocaleTimeString(
-                "bn-BD",
-                {
-                  hour:"2-digit",
-                  minute:"2-digit"
-                }
-              );
-          }
-
-          statusBox.innerHTML =
-            "⚫ Offline" +
-            (last ? " • " + last : "");
-
-          statusBox.className =
-            "status";
+            avatarHTML = `
+                <div class="w-7 h-7 shrink-0"></div>
+            `;
 
         }
 
-      }
+
+        /* Bubble radius */
+
+        let radius = "rounded-2xl";
+
+        if (isUser) {
+
+            if (sameAsPrevious && sameAsNext) {
+
+                radius =
+                    "rounded-2xl rounded-r-md";
+
+            } else if (sameAsPrevious) {
+
+                radius =
+                    "rounded-2xl rounded-tr-md";
+
+            } else if (sameAsNext) {
+
+                radius =
+                    "rounded-2xl rounded-br-md";
+
+            }
+
+        } else {
+
+            if (sameAsPrevious && sameAsNext) {
+
+                radius =
+                    "rounded-2xl rounded-l-md";
+
+            } else if (sameAsPrevious) {
+
+                radius =
+                    "rounded-2xl rounded-tl-md";
+
+            } else if (sameAsNext) {
+
+                radius =
+                    "rounded-2xl rounded-bl-md";
+
+            }
+
+        }
+
+
+        let content = "";
+
+
+        /* IMAGE */
+
+        if (msg.type === "image") {
+
+            content = `
+
+                <img
+                src="${msg.mediaUrl}"
+                class="rounded-xl max-w-[220px] max-h-[260px] object-cover border border-white/10"
+                alt="Image">
+
+            `;
+
+        }
+
+
+        /* AUDIO */
+
+        else if (msg.type === "audio") {
+
+            content = `
+
+                <div class="flex items-center gap-3 min-w-[190px]">
+
+                    <button
+                    onclick="playVoice(this)"
+                    class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 active:scale-90 transition">
+
+                        <i class="fa-solid fa-play text-xs"></i>
+
+                    </button>
+
+                    <div class="flex-1">
+
+                        <div class="h-1.5 bg-white/20 rounded-full overflow-hidden">
+
+                            <div
+                            class="h-full w-[42%] bg-white rounded-full">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span class="text-[10px] opacity-70">
+                        0:04
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* TEXT */
+
+        else {
+
+            content = `
+
+                <p class="text-[14px] leading-relaxed break-words">
+                    ${escapeHTML(msg.text)}
+                </p>
+
+            `;
+
+        }
+
+
+        /* Status */
+
+        let statusHTML = "";
+
+        if (isUser) {
+
+            let icon = "fa-check";
+
+            let statusText = "Sent";
+
+            if (msg.status === "delivered") {
+
+                icon = "fa-check-double";
+                statusText = "Delivered";
+
+            }
+
+            if (msg.status === "seen") {
+
+                icon = "fa-check-double";
+                statusText = "Seen";
+
+            }
+
+
+            statusHTML = `
+
+                <span class="text-[9px] ${
+                    msg.status === "seen"
+                        ? "text-pink-200"
+                        : "text-white/55"
+                } flex items-center gap-1">
+
+                    <i class="fa-solid ${icon}"></i>
+
+                    ${statusText}
+
+                </span>
+
+            `;
+
+        }
+
+
+        /* Time only at end of group */
+
+        let timeHTML = "";
+
+        if (!sameAsNext) {
+
+            timeHTML = `
+
+                <div class="flex justify-end items-center gap-1 mt-1 opacity-70">
+
+                    <span class="text-[9px]">
+                        ${msg.time}
+                    </span>
+
+                    ${statusHTML}
+
+                </div>
+
+            `;
+
+        }
+
+
+        row.innerHTML = `
+
+            ${avatarHTML}
+
+            <div
+            class="${
+                isUser
+                    ? "sent-bubble"
+                    : "received-bubble"
+            } ${radius} px-3.5 py-2.5 shadow-lg">
+
+                ${content}
+
+                ${timeHTML}
+
+            </div>
+
+        `;
+
+
+        wrapper.appendChild(row);
+
+        container.appendChild(wrapper);
 
     });
 
-    if(!found){
 
-      statusBox.innerHTML =
-        "⚫ Offline";
-
-      statusBox.className =
-        "status";
-
-    }
-
-  });
+    scrollBottom();
 
 }
-
-
-/* =========================
-   CHAT OPEN
-========================= */
-
-window.openChat = function(){
-
-  document.getElementById("homePage").style.display =
-    "none";
-
-  document.getElementById("chatPage").style.display =
-    "flex";
-
-};
-
-
-/* =========================
-   CHAT CLOSE
-========================= */
-
-window.closeChat = function(){
-
-  document.getElementById("chatPage").style.display =
-    "none";
-
-  document.getElementById("homePage").style.display =
-    "block";
-
-};
 
 
 /* =========================
    SEND MESSAGE
 ========================= */
 
-window.sendMessage = async function(){
+function sendMessage() {
 
-  const input =
-    document.getElementById("messageInput");
+    const input =
+        document.getElementById("messageInput");
 
-  const text =
-    input.value.trim();
+    const text =
+        input.value.trim();
 
-  const user =
-    auth.currentUser;
+    if (!text) return;
 
-  if(!user || !text) return;
 
-  const role =
-    getRole(user.email);
+    messages.push({
 
-  if(!role) return;
+        id: Date.now(),
 
-  try{
+        sender: "user",
 
-    await addDoc(
-      collection(db,"messages"),
-      {
+        text: text,
 
-        text:text,
+        time: formatTime(),
 
-        senderUid:user.uid,
+        status: "sent"
 
-        senderEmail:user.email,
+    });
 
-        senderRole:role,
-
-        seen:false,
-
-        createdAt:serverTimestamp()
-
-      }
-    );
 
     input.value = "";
 
-    await setTyping(false);
+    updateSendButton();
 
-  }catch(error){
+    closeEmoji();
 
-    console.error(error);
+    renderMessages();
 
-    alert("Message পাঠানো যায়নি 😢");
+    simulateReply();
 
-  }
-
-};
+}
 
 
 /* =========================
-   LOAD MESSAGES
+   PORI REPLY
 ========================= */
 
-function loadMessages(user){
+function simulateReply() {
 
-  const messagesBox =
-    document.getElementById("messages");
+    /* delivered */
 
-  const q =
-    query(
-      collection(db,"messages"),
-      orderBy("createdAt","asc")
-    );
+    setTimeout(() => {
 
-  onSnapshot(q,async(snapshot)=>{
+        messages.forEach(msg => {
 
-    messagesBox.innerHTML = "";
+            if (
+                msg.sender === "user" &&
+                msg.status === "sent"
+            ) {
 
-    const partnerEmail =
-      getPartnerEmail(user.email);
+                msg.status = "delivered";
 
-    for(const item of snapshot.docs){
-
-      const data = item.data();
-
-      /* শুধুমাত্র Alien/Pori message */
-
-      const validSender =
-        data.senderEmail &&
-        (
-          data.senderEmail.toLowerCase()
-          === user.email.toLowerCase()
-          ||
-          data.senderEmail.toLowerCase()
-          === partnerEmail.toLowerCase()
-        );
-
-      if(!validSender) continue;
-
-
-      const div =
-        document.createElement("div");
-
-      div.classList.add("msg");
-
-
-      const mine =
-        data.senderEmail.toLowerCase()
-        === user.email.toLowerCase();
-
-
-      if(mine){
-
-        div.classList.add("my-msg");
-
-      }else{
-
-        div.classList.add("other-msg");
-
-        /* partner-এর message দেখলে seen */
-
-        if(!data.seen){
-
-          try{
-
-            await updateDoc(
-              doc(db,"messages",item.id),
-              {
-                seen:true
-              }
-            );
-
-          }catch(e){
-
-            console.log(e);
-
-          }
-
-        }
-
-      }
-
-
-      const time =
-        data.createdAt
-        ? data.createdAt.toDate()
-          .toLocaleTimeString(
-            "bn-BD",
-            {
-              hour:"2-digit",
-              minute:"2-digit"
             }
-          )
-        : "...";
+
+        });
+
+        isOnline = true;
+
+        updateStatus();
+
+        renderMessages();
+
+    }, 700);
 
 
-      let seenText = "";
+    /* typing */
 
-      if(mine){
+    setTimeout(() => {
 
-        seenText =
-          data.seen
-          ? '<span class="seen">✓✓ Seen</span>'
-          : '<span class="seen">✓ Sent</span>';
+        document
+        .getElementById("typingIndicator")
+        .classList.remove("hidden");
 
-      }
+        scrollBottom();
 
-
-      div.innerHTML = `
-        ${escapeHTML(data.text)}
-
-        <span class="msg-time">
-          ${time} ${seenText}
-        </span>
-      `;
+    }, 1400);
 
 
-      messagesBox.appendChild(div);
+    /* reply */
+
+    setTimeout(() => {
+
+        document
+        .getElementById("typingIndicator")
+        .classList.add("hidden");
+
+
+        messages.forEach(msg => {
+
+            if (msg.sender === "user") {
+
+                msg.status = "seen";
+
+            }
+
+        });
+
+
+        const reply =
+            replies[
+                Math.floor(
+                    Math.random() * replies.length
+                )
+            ];
+
+
+        messages.push({
+
+            id: Date.now(),
+
+            sender: "pori",
+
+            text: reply,
+
+            time: formatTime()
+
+        });
+
+
+        renderMessages();
+
+        isOnline = true;
+
+        updateStatus();
+
+
+        /* Go offline after some time */
+
+        setTimeout(() => {
+
+            isOnline = false;
+
+            lastSeen = formatTime();
+
+            updateStatus();
+
+        }, 7000);
+
+
+    }, 3500);
+
+}
+
+
+/* =========================
+   VOICE MESSAGE
+========================= */
+
+function sendVoice() {
+
+    messages.push({
+
+        id: Date.now(),
+
+        sender: "user",
+
+        type: "audio",
+
+        time: formatTime(),
+
+        status: "sent"
+
+    });
+
+
+    renderMessages();
+
+    simulateReply();
+
+}
+
+
+function playVoice(button) {
+
+    const icon =
+        button.querySelector("i");
+
+    icon.className =
+        "fa-solid fa-pause text-xs";
+
+
+    setTimeout(() => {
+
+        icon.className =
+            "fa-solid fa-play text-xs";
+
+    }, 2000);
+
+}
+
+
+/* =========================
+   FILE
+========================= */
+
+function triggerFileUpload() {
+
+    document
+        .getElementById("fileInput")
+        .click();
+
+}
+
+
+function handleFile(event) {
+
+    const file =
+        event.target.files[0];
+
+    if (!file) return;
+
+
+    if (!file.type.startsWith("image/")) {
+
+        alert("শুধু Image file পাঠাতে পারবে।");
+
+        return;
 
     }
 
 
-    messagesBox.scrollTop =
-      messagesBox.scrollHeight;
+    const reader =
+        new FileReader();
 
-  });
+
+    reader.onload = function(e) {
+
+        messages.push({
+
+            id: Date.now(),
+
+            sender: "user",
+
+            type: "image",
+
+            mediaUrl: e.target.result,
+
+            time: formatTime(),
+
+            status: "sent"
+
+        });
+
+
+        renderMessages();
+
+        simulateReply();
+
+    };
+
+
+    reader.readAsDataURL(file);
 
 }
 
 
 /* =========================
-   TYPING
+   EMOJI
 ========================= */
 
-let typingTimeout;
+function toggleEmoji() {
 
-window.handleTyping = function(){
+    document
+        .getElementById("emojiPicker")
+        .classList.toggle("hidden");
 
-  setTyping(true);
-
-  clearTimeout(typingTimeout);
-
-  typingTimeout =
-    setTimeout(()=>{
-
-      setTyping(false);
-
-    },1200);
-
-};
+}
 
 
-async function setTyping(value){
+function closeEmoji() {
 
-  const user =
-    auth.currentUser;
+    document
+        .getElementById("emojiPicker")
+        .classList.add("hidden");
 
-  if(!user) return;
+}
 
-  const role =
-    getRole(user.email);
 
-  if(!role) return;
+function addEmoji(emoji) {
 
-  try{
+    const input =
+        document.getElementById("messageInput");
 
-    await setDoc(
-      doc(db,"typing",user.uid),
-      {
+    input.value += emoji;
 
-        email:user.email,
+    input.focus();
 
-        role:role,
+    updateSendButton();
 
-        typing:value,
+}
 
-        updatedAt:serverTimestamp()
 
-      },
-      {merge:true}
+/* =========================
+   INPUT
+========================= */
+
+function updateSendButton() {
+
+    const input =
+        document.getElementById("messageInput");
+
+    const send =
+        document.getElementById("sendBtn");
+
+    const voice =
+        document.getElementById("voiceBtn");
+
+
+    if (input.value.trim()) {
+
+        send.classList.remove("hidden");
+
+        voice.classList.add("hidden");
+
+    } else {
+
+        send.classList.add("hidden");
+
+        voice.classList.remove("hidden");
+
+    }
+
+}
+
+
+function handleEnter(event) {
+
+    if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        sendMessage();
+
+    }
+
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+function updateStatus() {
+
+    const dot =
+        document.getElementById("statusDot");
+
+    const text =
+        document.getElementById("statusText");
+
+
+    const profileStatus =
+        document.getElementById("profileStatus");
+
+
+    if (isOnline) {
+
+        dot.className =
+            "absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-purple-900 bg-emerald-400";
+
+
+        text.innerHTML = `
+
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
+
+            <span>Online</span>
+
+        `;
+
+
+        if (profileStatus) {
+
+            profileStatus.innerText =
+                "Online";
+
+            profileStatus.className =
+                "text-sm text-emerald-300 mt-1";
+
+        }
+
+    } else {
+
+        dot.className =
+            "absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-purple-900 bg-slate-500";
+
+
+        text.innerHTML = `
+
+            <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+
+            <span>Offline • ${lastSeen}</span>
+
+        `;
+
+
+        if (profileStatus) {
+
+            profileStatus.innerText =
+                `Offline • ${lastSeen}`;
+
+            profileStatus.className =
+                "text-sm text-slate-400 mt-1";
+
+        }
+
+    }
+
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+function toggleSettings() {
+
+    document
+        .getElementById("settingsMenu")
+        .classList.toggle("hidden");
+
+}
+
+
+function toggleManualStatus() {
+
+    isOnline = !isOnline;
+
+    if (!isOnline) {
+
+        lastSeen = formatTime();
+
+    }
+
+    updateStatus();
+
+    toggleSettings();
+
+}
+
+
+function clearChat() {
+
+    messages = [];
+
+    renderMessages();
+
+    toggleSettings();
+
+}
+
+
+function resetChat() {
+
+    messages = [...defaultMessages];
+
+    renderMessages();
+
+    toggleSettings();
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function toggleProfile() {
+
+    document
+        .getElementById("profileModal")
+        .classList.toggle("hidden");
+
+}
+
+
+/* =========================
+   CALL
+========================= */
+
+function simulateCall(type) {
+
+    document
+        .getElementById("callLabel")
+        .innerText =
+            `${type} Calling...`;
+
+    document
+        .getElementById("callModal")
+        .classList.remove("hidden");
+
+}
+
+
+function endCall() {
+
+    document
+        .getElementById("callModal")
+        .classList.add("hidden");
+
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+function goBack() {
+
+    if (history.length > 1) {
+
+        history.back();
+
+    } else {
+
+        alert("Back button pressed");
+
+    }
+
+}
+
+
+/* =========================
+   TIME
+========================= */
+
+function formatTime() {
+
+    const date = new Date();
+
+    let hours =
+        date.getHours();
+
+    let minutes =
+        date.getMinutes();
+
+    const ampm =
+        hours >= 12
+            ? "PM"
+            : "AM";
+
+
+    hours =
+        hours % 12 || 12;
+
+
+    minutes =
+        minutes < 10
+            ? "0" + minutes
+            : minutes;
+
+
+    const time =
+        `${hours}:${minutes} ${ampm}`;
+
+
+    return bengaliNumbers(time);
+
+}
+
+
+/* =========================
+   BENGALI NUMBERS
+========================= */
+
+function bengaliNumbers(str) {
+
+    const numbers = {
+
+        "0":"০",
+        "1":"১",
+        "2":"২",
+        "3":"৩",
+        "4":"৪",
+        "5":"৫",
+        "6":"৬",
+        "7":"৭",
+        "8":"৮",
+        "9":"৯"
+
+    };
+
+
+    return str.replace(
+        /[0-9]/g,
+        number => numbers[number]
     );
 
-  }catch(e){
+}
 
-    console.log(e);
 
-  }
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(text) {
+
+    return text
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
 
 }
 
 
 /* =========================
-   ENTER SEND
+   SCROLL
 ========================= */
 
-window.handleEnter = function(event){
+function scrollBottom() {
 
-  if(event.key === "Enter"){
+    const container =
+        document.getElementById("chatContainer");
 
-    event.preventDefault();
+    setTimeout(() => {
 
-    sendMessage();
+        container.scrollTo({
 
-  }
+            top: container.scrollHeight,
 
-};
+            behavior: "smooth"
 
+        });
 
-/* =========================
-   HTML SECURITY
-========================= */
-
-function escapeHTML(text){
-
-  const div =
-    document.createElement("div");
-
-  div.textContent = text;
-
-  return div.innerHTML;
+    }, 50);
 
 }
-
-
-/* =========================
-   MUSIC
-========================= */
-
-window.playMusic = function(){
-
-  const music =
-    document.getElementById("music");
-
-  music.play();
-
-};
 
 </script>
 
