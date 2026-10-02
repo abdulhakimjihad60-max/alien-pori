@@ -7,7 +7,6 @@
 <title>Pori - Chat App</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -15,24 +14,26 @@
     font-family:Arial,sans-serif;
 }
 
+html,
 body{
     width:100%;
-    height:100vh;
+    height:100%;
     overflow:hidden;
+}
 
+body{
     background:
         radial-gradient(circle at top left,#6d245f 0%,transparent 40%),
         radial-gradient(circle at bottom right,#39206c 0%,transparent 45%),
         #130b1d;
-
     color:white;
 }
 
 .app{
     width:100%;
     max-width:500px;
-    height:100vh;
-    margin:auto;
+    height:100dvh;
+    margin:0 auto;
 
     display:flex;
     flex-direction:column;
@@ -43,18 +44,15 @@ body{
     overflow:hidden;
 }
 
-
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .header{
     height:72px;
+    min-height:72px;
     flex-shrink:0;
 
     display:flex;
     align-items:center;
-
     padding:9px 14px;
 
     background:rgba(255,255,255,.08);
@@ -64,27 +62,21 @@ body{
 .logo{
     width:50px;
     height:50px;
+    flex-shrink:0;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
     margin-right:12px;
-
     border-radius:50%;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ff3f9f,
-            #984cff
-        );
+    background:linear-gradient(135deg,#ff3f9f,#984cff);
 
     font-size:21px;
     font-weight:bold;
 
-    box-shadow:
-        0 5px 20px rgba(255,63,159,.25);
+    box-shadow:0 5px 20px rgba(255,63,159,.25);
 }
 
 .info h2{
@@ -98,13 +90,11 @@ body{
     color:#a9ffc4;
 }
 
-
-/* =========================
-   CHAT
-========================= */
+/* CHAT */
 
 .chat{
     flex:1;
+    min-height:0;
 
     overflow-y:auto;
 
@@ -122,10 +112,7 @@ body{
     border-radius:10px;
 }
 
-
-/* =========================
-   MESSAGE
-========================= */
+/* MESSAGE */
 
 .message{
     max-width:78%;
@@ -144,7 +131,6 @@ body{
 }
 
 @keyframes messageIn{
-
     from{
         opacity:0;
         transform:translateY(4px);
@@ -154,36 +140,26 @@ body{
         opacity:1;
         transform:translateY(0);
     }
-
 }
 
 .message.pori{
     margin-right:auto;
-
     background:rgba(255,255,255,.12);
-
     border-bottom-left-radius:5px;
 }
 
 .message.me{
     margin-left:auto;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ff3f9f,
-            #984cff
-        );
+    background:linear-gradient(135deg,#ff3f9f,#984cff);
 
     border-bottom-right-radius:5px;
 }
 
 .time{
     margin-top:3px;
-
     font-size:9px;
     text-align:right;
-
     opacity:.65;
 }
 
@@ -191,19 +167,17 @@ body{
     margin-left:4px;
 }
 
-
-/* =========================
-   INPUT
-========================= */
+/* INPUT */
 
 .input-area{
     width:100%;
+    min-height:60px;
+    flex-shrink:0;
 
     display:flex;
     align-items:center;
 
     gap:8px;
-
     padding:9px;
 
     background:rgba(255,255,255,.08);
@@ -238,42 +212,29 @@ body{
 .send{
     width:42px;
     height:42px;
-
     flex-shrink:0;
 
     border:none;
     border-radius:50%;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ff3f9f,
-            #984cff
-        );
+    background:linear-gradient(135deg,#ff3f9f,#984cff);
 
     color:white;
 
     font-size:18px;
 
     cursor:pointer;
-
-    transition:.12s;
 }
 
 .send:active{
     transform:scale(.88);
 }
 
-
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 .login-box{
     position:fixed;
-
     inset:0;
-
     z-index:100;
 
     display:none;
@@ -314,9 +275,7 @@ body{
 
 .login-card p{
     font-size:12px;
-
     color:#bbb;
-
     margin-bottom:18px;
 }
 
@@ -349,54 +308,36 @@ body{
     margin-top:12px;
 
     border:none;
-
     border-radius:13px;
 
     color:white;
 
     font-size:15px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ff3f9f,
-            #984cff
-        );
+    background:linear-gradient(135deg,#ff3f9f,#984cff);
 
     cursor:pointer;
 }
 
 .login-error{
     margin-top:10px;
-
     font-size:12px;
-
     color:#ff9fbd;
 }
-
 </style>
 </head>
 
-
 <body>
 
+<!-- LOGIN -->
 
-<!-- =========================
-     LOGIN
-========================= -->
-
-<div
-    class="login-box"
-    id="loginBox"
->
+<div class="login-box" id="loginBox">
 
     <div class="login-card">
 
         <h2>💜 Pori Chat</h2>
 
-        <p>
-            Login to continue
-        </p>
+        <p>Login to continue</p>
 
         <input
             class="login-input"
@@ -417,6 +358,7 @@ body{
         <button
             class="login-button"
             onclick="loginUser()"
+            type="button"
         >
             Login
         </button>
@@ -430,32 +372,19 @@ body{
 
 </div>
 
-
-<!-- =========================
-     APP
-========================= -->
+<!-- APP -->
 
 <div class="app">
 
-
-    <!-- HEADER -->
-
     <div class="header">
 
-        <div class="logo">
-            P
-        </div>
+        <div class="logo">P</div>
 
         <div class="info">
 
-            <h2>
-                Pori
-            </h2>
+            <h2>Pori</h2>
 
-            <div
-                class="status"
-                id="status"
-            >
+            <div class="status" id="status">
                 Connecting...
             </div>
 
@@ -463,16 +392,7 @@ body{
 
     </div>
 
-
-    <!-- CHAT -->
-
-    <div
-        class="chat"
-        id="chat"
-    ></div>
-
-
-    <!-- INPUT -->
+    <div class="chat" id="chat"></div>
 
     <div class="input-area">
 
@@ -496,29 +416,19 @@ body{
 
 </div>
 
-
-<!-- =========================
-     FIREBASE
-========================= -->
+<!-- FIREBASE -->
 
 <script type="module">
 
 import {
     initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
     getAuth,
     signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
     getFirestore,
@@ -528,14 +438,10 @@ import {
     orderBy,
     onSnapshot,
     serverTimestamp
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -562,26 +468,18 @@ const firebaseConfig = {
 };
 
 
-/* =========================
-   START FIREBASE
-========================= */
+/* START FIREBASE */
 
-const app =
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const auth =
-getAuth(app);
+const auth = getAuth(app);
 
-const db =
-getFirestore(app);
+const db = getFirestore(app);
 
 
-/* =========================
-   CHAT ROOM
-========================= */
+/* CHAT ROOM */
 
-const messagesRef =
-collection(
+const messagesRef = collection(
     db,
     "chats",
     "alien-pori-chat",
@@ -589,48 +487,32 @@ collection(
 );
 
 
-/* =========================
-   ELEMENTS
-========================= */
+/* ELEMENTS */
 
 const input =
-document.getElementById(
-    "messageInput"
-);
+document.getElementById("messageInput");
 
 const chat =
-document.getElementById(
-    "chat"
-);
+document.getElementById("chat");
 
 const status =
-document.getElementById(
-    "status"
-);
+document.getElementById("status");
 
 const loginBox =
-document.getElementById(
-    "loginBox"
-);
+document.getElementById("loginBox");
 
 const loginError =
-document.getElementById(
-    "loginError"
-);
+document.getElementById("loginError");
 
 
-/* =========================
-   USER
-========================= */
+/* USER */
 
 let currentUser = null;
 
 let unsubscribeMessages = null;
 
 
-/* =========================
-   AUTH
-========================= */
+/* AUTH */
 
 onAuthStateChanged(
     auth,
@@ -638,32 +520,23 @@ onAuthStateChanged(
 
         if(user){
 
-            currentUser =
-            user;
+            currentUser = user;
 
-            loginBox.style.display =
-            "none";
+            loginBox.style.display = "none";
 
-            status.textContent =
-            "Online";
+            status.textContent = "Online";
 
             loadMessages();
 
-        }
+        }else{
 
-        else{
+            currentUser = null;
 
-            currentUser =
-            null;
+            loginBox.style.display = "flex";
 
-            loginBox.style.display =
-            "flex";
+            status.textContent = "Login required";
 
-            status.textContent =
-            "Login required";
-
-            chat.innerHTML =
-            "";
+            chat.innerHTML = "";
 
         }
 
@@ -671,26 +544,20 @@ onAuthStateChanged(
 );
 
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
-window.loginUser =
-async function(){
+window.loginUser = async function(){
 
     const email =
-    document.getElementById(
-        "emailInput"
-    ).value.trim();
+    document.getElementById("emailInput")
+    .value
+    .trim();
 
     const password =
-    document.getElementById(
-        "passwordInput"
-    ).value;
+    document.getElementById("passwordInput")
+    .value;
 
-    loginError.textContent =
-    "";
-
+    loginError.textContent = "";
 
     if(!email || !password){
 
@@ -698,9 +565,7 @@ async function(){
         "Email and password দিন।";
 
         return;
-
     }
-
 
     try{
 
@@ -710,9 +575,7 @@ async function(){
             password
         );
 
-    }
-
-    catch(error){
+    }catch(error){
 
         console.error(error);
 
@@ -724,9 +587,7 @@ async function(){
 };
 
 
-/* =========================
-   LOAD CHAT
-========================= */
+/* LOAD CHAT */
 
 function loadMessages(){
 
@@ -736,16 +597,10 @@ function loadMessages(){
 
     }
 
-
-    const q =
-    query(
+    const q = query(
         messagesRef,
-        orderBy(
-            "createdAt",
-            "asc"
-        )
+        orderBy("createdAt","asc")
     );
-
 
     unsubscribeMessages =
     onSnapshot(
@@ -753,20 +608,15 @@ function loadMessages(){
 
         function(snapshot){
 
-            chat.innerHTML =
-            "";
-
+            chat.innerHTML = "";
 
             snapshot.forEach(
                 function(doc){
 
-                    showMessage(
-                        doc.data()
-                    );
+                    showMessage(doc.data());
 
                 }
             );
-
 
             scrollChat();
 
@@ -788,33 +638,23 @@ function loadMessages(){
 }
 
 
-/* =========================
-   SHOW MESSAGE
-========================= */
+/* SHOW MESSAGE */
 
 function showMessage(data){
 
     const message =
-    document.createElement(
-        "div"
-    );
-
+    document.createElement("div");
 
     const mine =
     currentUser &&
-    data.uid ===
-    currentUser.uid;
-
+    data.uid === currentUser.uid;
 
     message.className =
     mine
     ? "message me"
     : "message pori";
 
-
-    let time =
-    "Now";
-
+    let time = "Now";
 
     if(data.createdAt){
 
@@ -831,18 +671,13 @@ function showMessage(data){
                 }
             );
 
-        }
-
-        catch(error){}
+        }catch(error){}
 
     }
 
-
     message.innerHTML = `
 
-        ${escapeHTML(
-            data.text || ""
-        )}
+        ${escapeHTML(data.text || "")}
 
         <div class="time">
 
@@ -858,24 +693,17 @@ function showMessage(data){
 
     `;
 
-
-    chat.appendChild(
-        message
-    );
+    chat.appendChild(message);
 
 }
 
 
-/* =========================
-   SEND MESSAGE
-========================= */
+/* SEND MESSAGE */
 
-window.sendMessage =
-async function(){
+window.sendMessage = async function(){
 
     const text =
     input.value.trim();
-
 
     if(!text){
 
@@ -883,23 +711,17 @@ async function(){
 
     }
 
-
     if(!currentUser){
 
-        alert(
-            "আগে login করো।"
-        );
+        alert("আগে login করো।");
 
         return;
 
     }
 
-
-    input.value =
-    "";
+    input.value = "";
 
     input.focus();
-
 
     try{
 
@@ -907,50 +729,35 @@ async function(){
             messagesRef,
             {
 
-                text:
-                text,
+                text:text,
 
-                uid:
-                currentUser.uid,
+                uid:currentUser.uid,
 
-                email:
-                currentUser.email || "",
+                email:currentUser.email || "",
 
-                createdAt:
-                serverTimestamp()
+                createdAt:serverTimestamp()
 
             }
         );
 
-    }
+    }catch(error){
 
-    catch(error){
+        console.error(error);
 
-        console.error(
-            error
-        );
-
-        alert(
-            "Message send হয়নি।"
-        );
+        alert("Message send হয়নি।");
 
     }
 
 };
 
 
-/* =========================
-   ENTER SEND
-========================= */
+/* ENTER SEND */
 
 input.addEventListener(
     "keydown",
     function(e){
 
-        if(
-            e.key ===
-            "Enter"
-        ){
+        if(e.key === "Enter"){
 
             e.preventDefault();
 
@@ -962,9 +769,7 @@ input.addEventListener(
 );
 
 
-/* =========================
-   SCROLL
-========================= */
+/* SCROLL */
 
 function scrollChat(){
 
@@ -980,19 +785,14 @@ function scrollChat(){
 }
 
 
-/* =========================
-   SECURITY
-========================= */
+/* SECURITY */
 
 function escapeHTML(text){
 
     const div =
-    document.createElement(
-        "div"
-    );
+    document.createElement("div");
 
-    div.textContent =
-    text;
+    div.textContent = text;
 
     return div.innerHTML;
 
@@ -1000,6 +800,5 @@ function escapeHTML(text){
 
 </script>
 
-
 </body>
-    </html>
+</html>
